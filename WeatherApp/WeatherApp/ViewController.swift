@@ -41,6 +41,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         table.delegate = self
         table.dataSource = self
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupLocation()
     }
     
     func setupLocation() {
@@ -50,7 +56,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.isEmpty, currentLocation == nil {
+        if !locations.isEmpty, currentLocation == nil {
             currentLocation = locations.first
             locationManager.stopUpdatingLocation()
             requestWeatherForLocation()
