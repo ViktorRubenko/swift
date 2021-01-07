@@ -31,6 +31,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let locationManager = CLLocationManager()
     
     var currentLocation: CLLocation?
+    
+    let api_key = "e41cb2ac3eef6ce33f44bd481da7d890"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,13 +69,96 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let currentLocation = currentLocation else {
             return
         }
-        let long = currentLocation.coordinate.longitude
+        let lon = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
-        print("\(long) | \(lat)")
+        
+        getWeatherForecase(lat: lat, lon: lon)
+        
+    }
+    
+    func getWeatherForecase<T>(lat: T, lon: T){
+        if let url = URL(
+            string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&appid=\(api_key)"
+        ) {
+            URLSession.shared.dataTask(with: url) {data, response, error in
+                if let data = data {
+                    do {
+                        let result = try JSONDecoder().decode(Response.self, from: data)
+                        print(result)
+                    } catch let error {
+                        print(error)
+                    }
+                }
+            }.resume()
+        } else {
+            print("something went wrong")
+        }
     }
     
 }
 
 struct Weather {
+    
+}
+
+struct Response: Codable {
+    let cod: String
+    let message: Int
+    let cnt: Int
+    let list: [Step]
+    
+    struct Step: Codable {
+        let dt: Int
+        let main: MainInfo
+        let weather: [Weather]
+        let clouds: Clouds
+        let wind: Wind
+        let visibility: Int
+        let pop: Float
+        let rain: Rain?
+        let sys: Sys
+        let dt_txt: String
+        
+        struct MainInfo: Codable {
+            let temp: Float
+            let feels_like: Float
+            let temp_min: Float
+            let temp_max: Float
+            let pressure: Float
+            let sea_level: Float
+            let grnd_level: Float
+            let humidity: Float
+            let temp_kf: Float
+        }
+        
+        struct Weather: Codable {
+            let id: Int
+            let main: String
+            let description: String
+            let icon: String
+        }
+        
+        struct Clouds: Codable {
+            let all: Int
+        }
+        
+        struct Wind: Codable {
+            let speed: Float
+            let deg: Int
+        }
+        
+        struct Rain: Codable {
+            let th: Float
+            enum CodingKeys: String, CodingKey {
+                case th = "3h"
+            }
+        }
+        
+        struct Sys: Codable {
+            let pod: String
+        }
+    }
+    
+    
     
 }
