@@ -13,6 +13,10 @@ import CoreLocation
 // custom cell: collection view
 // API / request data
 
+enum WeatherAppError: Error {
+    case requestFailed
+}
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -20,12 +24,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: WeatherTableViewCell.identifier, for: indexPath) as! WeatherTableViewCell
+        cell.configure(with: models[indexPath.row])
+        cell.backgroundColor = .clear
+        return cell
     }
     
     
     @IBOutlet var table: UITableView!
-    
+
     var models = [Step]()
     
     let locationManager = CLLocationManager()
@@ -37,6 +44,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .systemBlue
+        
+        table.backgroundColor = .clear
+        table.rowHeight = 44.0
         // Register 2 cells
         table.register(HourlyTableViewCell.nib(), forCellReuseIdentifier: HourlyTableViewCell.identifier)
         table.register(WeatherTableViewCell.nib(), forCellReuseIdentifier: WeatherTableViewCell.identifier)
@@ -61,8 +72,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if !locations.isEmpty, currentLocation == nil {
             currentLocation = locations.first
             locationManager.stopUpdatingLocation()
-            requestWeatherForLocation()
         }
+        requestWeatherForLocation()
     }
 
     func requestWeatherForLocation() {
@@ -91,17 +102,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             self.models.removeAll()
                         }
                         let result = try JSONDecoder().decode(Response.self, from: data)
-                        for step in result.list {
-                            self.models.append(step)
+                        self.models.append(contentsOf: result.list)
+                        DispatchQueue.main.async {
+                            self.table.reloadData()
                         }
                     } catch let error {
-                        print(error)
+                        DispatchQueue.main.async {
+                            self.showAlert(title: "Error", message: "\(error)")
+                        }
                     }
                 }
             }.resume()
         } else {
             print("something went wrong")
         }
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
@@ -153,6 +174,7 @@ struct Step: Codable {
         let main: String
         let description: String
         let icon: String
+
     }
     
     struct Clouds: Codable {
