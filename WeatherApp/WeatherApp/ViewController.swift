@@ -77,8 +77,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func getWeatherForecase<T>(lat: T, lon: T){
+        
+        let units = "metric"
+        
         if let url = URL(
-            string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&appid=\(api_key)"
+            string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&units=\(units)&appid=\(api_key)"
         ) {
             URLSession.shared.dataTask(with: url) {data, response, error in
                 if let data = data {
