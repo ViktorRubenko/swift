@@ -48,7 +48,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.view.backgroundColor = .systemBlue
         
         table.backgroundColor = .clear
-        table.rowHeight = 44.0
+        table.rowHeight = 80.0
         // Register 2 cells
         table.register(HourlyTableViewCell.nib(), forCellReuseIdentifier: HourlyTableViewCell.identifier)
         table.register(WeatherTableViewCell.nib(), forCellReuseIdentifier: WeatherTableViewCell.identifier)
@@ -104,10 +104,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         }
                         let result = try JSONDecoder().decode(Response.self, from: data)
                         self.days_3h.append(contentsOf: result.list)
-                        print(self.days_3h)
                         self.days.append(contentsOf: self.calcWeatherForDays(from: result.list))
                         DispatchQueue.main.async {
                             self.table.reloadData()
+                            self.table.tableHeaderView = self.createTableHeader(location: result.city)
                         }
                     } catch let error {
                         DispatchQueue.main.async {
@@ -116,10 +116,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     }
                 }
             }.resume()
-        } else {
-            print("something went wrong")
         }
+    }
+    
+    func createTableHeader(location: City) -> UIView {
+        let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height * 0.3))
         
+        headerView.backgroundColor = .blue
+        
+        let locationLabel = UILabel(frame: CGRect(x: 10.0, y: 10.0, width: view.frame.size.width-20.0, height: view.frame.size.height * 0.3 / 5))
+        locationLabel.textAlignment = .center
+        locationLabel.text = location.name
+        headerView.addSubview(locationLabel)
+        //let tempLabel = UILabel()
+        //let summaryLabel = UILabel()
+        
+        return headerView
     }
     
     func showAlert(title: String, message: String) {
@@ -202,7 +214,15 @@ struct Response: Codable {
     let message: Int
     let cnt: Int
     let list: [Step]
-    }
+    let city: City
+}
+
+struct City: Codable {
+    let name: String
+    let country: String
+    let sunrise: Int
+    let sunset: Int
+}
 
 struct Step: Codable {
     let dt: Int // UTC time
