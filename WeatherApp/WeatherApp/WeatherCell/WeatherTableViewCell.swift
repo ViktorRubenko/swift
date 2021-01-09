@@ -34,6 +34,10 @@ class WeatherTableViewCell: UITableViewCell {
     func configure(with day: Day) {
         self.maxTemp.text = "\(Int(day.max_temp))°"
         self.minTemp.text = "\(Int(day.min_temp))°"
+        
+        self.maxTemp.font = self.maxTemp.font.withSize(15)
+        self.minTemp.font = self.maxTemp.font.withSize(15)
+        
         self.weatherLabel.text = day.weather
 
         self.dateLabel.text = day.day_name

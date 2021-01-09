@@ -30,7 +30,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    
     @IBOutlet var table: UITableView!
 
     var days = [Day]()
@@ -44,7 +43,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = .systemBlue
         
         table.backgroundColor = .clear
@@ -84,12 +82,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let lon = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
         
-        getWeatherForecase(lat: lat, lon: lon)
+        getWeatherForecast(lat: lat, lon: lon)
         
     }
     
-    func getWeatherForecase<T>(lat: T, lon: T){
-        
+    func getWeatherForecast<T>(lat: T, lon: T){
         let units = "metric"
 
         if let url = URL(
@@ -107,29 +104,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         self.days.append(contentsOf: self.calcWeatherForDays(from: result.list))
                         DispatchQueue.main.async {
                             self.table.reloadData()
-                            self.table.tableHeaderView = self.createTableHeader(location: result.city)
+                            self.table.tableHeaderView = self.createTableHeader(location: result.city, weather: self.days_3h[0])
                         }
                     } catch let error {
                         DispatchQueue.main.async {
                             self.showAlert(title: "Error", message: "\(error)")
                         }
                     }
+                } else {
+                    print("something went wrong")
                 }
             }.resume()
         }
     }
     
-    func createTableHeader(location: City) -> UIView {
-        let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height * 0.3))
-        
+    func createTableHeader(location: City, weather: Step) -> UIView {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height * 0.3))
         headerView.backgroundColor = .blue
         
-        let locationLabel = UILabel(frame: CGRect(x: 10.0, y: 10.0, width: view.frame.size.width-20.0, height: view.frame.size.height * 0.3 / 5))
+        let locationLabel = UILabel(frame: CGRect(x: 10, y: 10, width: headerView.frame.size.width-10, height: headerView.frame.size.height / 3 - 10))
+        headerView.addSubview(locationLabel)
+        
         locationLabel.textAlignment = .center
         locationLabel.text = location.name
-        headerView.addSubview(locationLabel)
-        //let tempLabel = UILabel()
-        //let summaryLabel = UILabel()
+        locationLabel.font = locationLabel.font.withSize(30)
+
+        let summaryLabel = UILabel(frame: CGRect(x: 10, y: 10 + locationLabel.frame.size.height, width: headerView.frame.size.width-10, height: headerView.frame.size.height / 3 - 10))
+        summaryLabel.text = weather.weather[0].description
+        summaryLabel.font = summaryLabel.font.withSize(22)
+        summaryLabel.textAlignment = .center
+        headerView.addSubview(summaryLabel)
+        
+        let tempLabel = UILabel(frame: CGRect(x: 10, y: 10 + locationLabel.frame.size.height + summaryLabel.frame.size.height, width: headerView.frame.size.width - 10, height: headerView.frame.size.height / 3 - 10))
+        tempLabel.text = "\(Int(round(weather.main.temp)))°"
+        tempLabel.textAlignment = .center
+        tempLabel.font = tempLabel.font.withSize(50)
+        headerView.addSubview(tempLabel)
         
         return headerView
     }
@@ -144,6 +154,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func calcWeatherForDays(from steps: [Step]) -> [Day] {
         // Calculate weather for days from 3h forecasts
         var days = [Day]()
+        
+        for step in steps {
+            print(step.main.temp_max, step.main.temp_min)
+        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
