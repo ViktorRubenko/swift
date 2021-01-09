@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="400" height="76"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="maxTemp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6k-Yp-kG5">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="minTemp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6k-Yp-kG5">
                         <rect key="frame" x="360" y="0.0" width="30" height="76"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="31Q-uy-qcR"/>
@@ -25,7 +25,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="minTemp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGx-Tg-764">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="maxTemp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGx-Tg-764">
                         <rect key="frame" x="320" y="0.0" width="30" height="76"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="XPv-RD-P42"/>
@@ -80,8 +80,8 @@
             <connections>
                 <outlet property="dateLabel" destination="AeW-qV-KzR" id="YDm-4T-Unm"/>
                 <outlet property="iconImageView" destination="GDJ-Ab-vwl" id="uKa-cj-KId"/>
-                <outlet property="maxTemp" destination="A6k-Yp-kG5" id="M2w-Mk-kSr"/>
-                <outlet property="minTemp" destination="rGx-Tg-764" id="bNJ-wJ-3t7"/>
+                <outlet property="maxTemp" destination="rGx-Tg-764" id="CgC-tI-deJ"/>
+                <outlet property="minTemp" destination="A6k-Yp-kG5" id="moq-VO-fr8"/>
                 <outlet property="weatherLabel" destination="TX7-ml-nzt" id="PcG-JQ-Wsj"/>
             </connections>
             <point key="canvasLocation" x="195.6521739130435" y="76.339285714285708"/>

@@ -20,12 +20,12 @@ enum WeatherAppError: Error {
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return models.count
+        return days.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WeatherTableViewCell.identifier, for: indexPath) as! WeatherTableViewCell
-        cell.configure(with: models[indexPath.row])
+        cell.configure(with: days[indexPath.row])
         cell.backgroundColor = .clear
         return cell
     }
@@ -33,7 +33,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet var table: UITableView!
 
-    var models = [Step]()
+    var days = [Day]()
+    var days_3h = [Step]()
     
     let locationManager = CLLocationManager()
     
@@ -90,19 +91,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func getWeatherForecase<T>(lat: T, lon: T){
         
         let units = "metric"
-        
+
         if let url = URL(
             string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&units=\(units)&appid=\(api_key)"
         ) {
             URLSession.shared.dataTask(with: url) {data, response, error in
                 if let data = data {
                     do {
-                        // Clear models if user update forecast
-                        if !self.models.isEmpty {
-                            self.models.removeAll()
+                        // Clear days if user update forecast
+                        if !self.days.isEmpty {
+                            self.days.removeAll()
                         }
                         let result = try JSONDecoder().decode(Response.self, from: data)
-                        self.models.append(contentsOf: result.list)
+                        self.days_3h.append(contentsOf: result.list)
+                        print(self.days_3h)
+                        self.days.append(contentsOf: self.calcWeatherForDays(from: result.list))
                         DispatchQueue.main.async {
                             self.table.reloadData()
                         }
@@ -116,6 +119,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             print("something went wrong")
         }
+        
     }
     
     func showAlert(title: String, message: String) {
@@ -125,6 +129,71 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.present(alert, animated: true, completion: nil)
     }
     
+    func calcWeatherForDays(from steps: [Step]) -> [Day] {
+        // Calculate weather for days from 3h forecasts
+        var days = [Day]()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        var prev_day_name = dateFormatter.string(from: Date(timeIntervalSince1970: Double(steps[0].dt)))
+        
+        var max_temps = [Float]()
+        var min_temps = [Float]()
+        var weathers = [String]()
+        
+        for step in steps {
+            let day_name = dateFormatter.string(from: Date(timeIntervalSince1970: Double(step.dt)))
+            if day_name != prev_day_name {
+                let weather = calcMostFrequently(from: weathers)
+                var id: Int
+                switch weather {
+                case "Thunderstorm":
+                    id = 200
+                case "Drizzle":
+                    id = 300
+                case "Rain":
+                    id = 500
+                case "Snow":
+                    id = 600
+                case "Clouds":
+                    id = 801
+                case "Clear":
+                    id = 800
+                default:
+                    id = 700
+                }
+                
+                days.append(Day(day_name: prev_day_name, weather: weather, id: id, max_temp: round(max_temps.reduce(0.0, +) / Float(max_temps.count)), min_temp: round(min_temps.reduce(0.0, +) / Float(min_temps.count))))
+                max_temps.removeAll()
+                min_temps.removeAll()
+                weathers.removeAll()
+                prev_day_name = day_name
+            }
+            weathers.append(step.weather[0].main)
+            max_temps.append(step.main.temp_max)
+            min_temps.append(step.main.temp_min)
+        }
+        return days
+    }
+}
+    
+func calcMostFrequently(from array: [String]) -> String {
+    var frequency: [String:Int] = [:]
+    
+    for x in array {
+        frequency[x] = (frequency[x] ?? 0) + 1
+    }
+    
+    return frequency.sorted(by: { $0.0 > $1.0 })[0].0
+    
+}
+
+struct Day {
+    let day_name: String
+    let weather: String
+    let id: Int
+    let max_temp: Float
+    let min_temp: Float
 }
 
 
@@ -196,7 +265,4 @@ struct Step: Codable {
     struct Sys: Codable {
         let pod: String
     }
-    
-    
-    
 }

@@ -31,17 +31,15 @@ class WeatherTableViewCell: UITableViewCell {
         return UINib(nibName: "WeatherTableViewCell", bundle: nil)
     }
     
-    func configure(with model: Step) {
-        self.maxTemp.text = "\(Int(model.main.temp_max))"
-        self.minTemp.text = "\(Int(model.main.temp_min))"
-        self.weatherLabel.text = model.weather[0].main
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM HH:mm"
-        self.dateLabel.text = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(model.dt)))
+    func configure(with day: Day) {
+        self.maxTemp.text = "\(Int(day.max_temp))°"
+        self.minTemp.text = "\(Int(day.min_temp))°"
+        self.weatherLabel.text = day.weather
+
+        self.dateLabel.text = day.day_name
         
         var icon_name: String?
-        switch model.weather[0].id {
+        switch day.id {
         /*
          id:
             2XX - Thunderstorm
