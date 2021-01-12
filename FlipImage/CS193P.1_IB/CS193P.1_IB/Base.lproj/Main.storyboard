@@ -138,9 +138,8 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wiO-iI-huf">
-                                <rect key="frame" x="128" y="394" width="159" height="109"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wiO-iI-huf">
+                                <rect key="frame" x="135.5" y="424" width="143" height="48"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="New Game">
@@ -152,6 +151,9 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flips: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oab-qy-Ugc">
                                 <rect key="frame" x="10" y="780" width="394" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="FOm-Hq-ppi"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
@@ -162,9 +164,11 @@
                         <constraints>
                             <constraint firstItem="bfr-Ya-VNM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="8fr-8f-7rf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bfr-Ya-VNM" secondAttribute="trailing" constant="10" id="FIP-2X-HsG"/>
+                            <constraint firstItem="wiO-iI-huf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="K6i-3n-C6c"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Oab-qy-Ugc" secondAttribute="trailing" constant="10" id="aMV-mS-Fww"/>
                             <constraint firstItem="Oab-qy-Ugc" firstAttribute="top" secondItem="bfr-Ya-VNM" secondAttribute="bottom" constant="10" id="bga-aB-iJ0"/>
                             <constraint firstItem="bfr-Ya-VNM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="cV1-zD-zgY"/>
+                            <constraint firstItem="wiO-iI-huf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eDG-19-34l"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Oab-qy-Ugc" secondAttribute="bottom" constant="10" id="ezq-ig-07h"/>
                             <constraint firstItem="Oab-qy-Ugc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="r8e-om-ryb"/>
                         </constraints>
