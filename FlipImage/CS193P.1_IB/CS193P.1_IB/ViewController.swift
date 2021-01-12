@@ -12,9 +12,9 @@ class ViewController: UIViewController {
     lazy var game = FlipGame(numberOfPairsOfCard: (cardButtons.count + 1) / 2)
     
     lazy var activeButtonsCount = cardButtons.count
-
+    
     @IBOutlet weak var flipCountLabel: UILabel!
-
+    
     @IBOutlet var cardButtons: [UIButton]!
     
     @IBOutlet var newGameButton: UIButton!
@@ -31,6 +31,8 @@ class ViewController: UIViewController {
         refreshView()
         updateViewFromModel()
     }
+    
+    // MARK: Handle Card Ouch Behavoir
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         
@@ -63,9 +65,9 @@ class ViewController: UIViewController {
                 button.setTitle(nil, for: .normal)
                 button.backgroundColor = UIColor.systemOrange
                 if card.isMatched && !button.isHidden{
-                        button.isHidden = true
-                        activeButtonsCount -= 1
-                    }
+                    button.isHidden = true
+                    activeButtonsCount -= 1
+                }
                 if activeButtonsCount == 0 {
                     newGameButton.isHidden = false
                 }
@@ -79,9 +81,9 @@ class ViewController: UIViewController {
     
     func emojiForCard(for card: Card) -> String {
         if emojiDict[card.id] == nil && emojiChoices.count > 0 {
-                let random_index = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-                emojiDict[card.id] = emojiChoices.remove(at: random_index)
-            }
+            let random_index = Int(arc4random_uniform(UInt32(emojiChoices.count)))
+            emojiDict[card.id] = emojiChoices.remove(at: random_index)
+        }
         return emojiDict[card.id] ?? "?"
     }
     
