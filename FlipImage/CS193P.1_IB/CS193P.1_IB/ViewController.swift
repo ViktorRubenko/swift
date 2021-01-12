@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         activeButtonsCount = cardButtons.count
         flipCount = 0
         for button in cardButtons {
-            button.isHidden = false
+            button.isEnabled = true
         }
     }
     
@@ -63,9 +63,12 @@ class ViewController: UIViewController {
                 button.backgroundColor = .white
             } else {
                 button.setTitle(nil, for: .normal)
-                button.backgroundColor = UIColor.systemOrange
-                if card.isMatched && !button.isHidden{
-                    button.isHidden = true
+                if button.isEnabled {
+                    button.backgroundColor = UIColor.systemOrange
+                }
+                if card.isMatched && button.isEnabled{
+                    button.backgroundColor = .clear
+                    button.isEnabled = false
                     activeButtonsCount -= 1
                 }
                 if activeButtonsCount == 0 {
