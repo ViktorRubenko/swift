@@ -13,7 +13,7 @@ enum ThemeGenerator: CaseIterable {
     case sports
     case faces
     
-    static func getTheme() -> [String.SubSequence] {
+    static func getTheme() -> [String] {
         let theme = ThemeGenerator.allCases.randomElement()!
         var emoji = ""
         switch theme {
@@ -24,6 +24,6 @@ enum ThemeGenerator: CaseIterable {
         case .faces:
             emoji = "😀 😂 😍 😎 🤩 🤢 🤐 🙄"
         }
-        return emoji.split(separator: " ").shuffled()
+        return emoji.components(separatedBy: " ").shuffled()
     }
 }

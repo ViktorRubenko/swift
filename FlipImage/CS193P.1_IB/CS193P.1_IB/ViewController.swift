@@ -91,7 +91,7 @@ class ViewController: UIViewController {
         }
     }
     
-    private var emojiChoices = ["💩", "🐨", "🐷", "🦊", "🐶", "🐮", "🐼"]
+    private var emojiChoices = ThemeGenerator.getTheme()
     
     private var emojiDict = [Int:String]()
     
