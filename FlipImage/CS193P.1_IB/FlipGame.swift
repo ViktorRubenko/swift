@@ -38,6 +38,7 @@ struct FlipGame {
             cards[index].isMatched = false
             cards[index].isFaceUp = false
         }
+        cards.shuffle()
     }
     
     mutating func chooseCard(at index: Int) {

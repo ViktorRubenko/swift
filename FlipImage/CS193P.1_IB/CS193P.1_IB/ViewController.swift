@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         emojiChoices = ThemeGenerator.getTheme()
         emojiDict = [Int:String]()
         activeButtonsCount = cardButtons.count
-        game = FlipGame(numberOfPairsOfCard: numberOfPairsOfCards)
+        game.refresh()
         refreshView()
         updateViewFromModel()
     }
