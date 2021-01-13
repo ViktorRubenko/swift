@@ -13,6 +13,10 @@ class ViewController: UIViewController {
     
     private(set) lazy var activeButtonsCount = cardButtons.count
     
+    private var emojiChoices = ThemeGenerator.getTheme()
+    
+    private var emojiDict = [Int:String]()
+    
     @IBOutlet private weak var flipCountLabel: UILabel!
     
     @IBOutlet private var cardButtons: [UIButton]!
@@ -30,7 +34,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
-        game.refresh()
+        emojiChoices = ThemeGenerator.getTheme()
+        emojiDict = [Int:String]()
+        activeButtonsCount = cardButtons.count
+        game = FlipGame(numberOfPairsOfCard: numberOfPairsOfCards)
         refreshView()
         updateViewFromModel()
     }
@@ -38,7 +45,6 @@ class ViewController: UIViewController {
     // MARK: Handle Card Touch Behavoir
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
-        
         if let cardNumber = cardButtons.firstIndex(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -53,7 +59,7 @@ class ViewController: UIViewController {
         activeButtonsCount = cardButtons.count
         flipCount = 0
         for button in cardButtons {
-            button.isHidden = false
+            button.isEnabled = true
         }
     }
     
@@ -82,18 +88,14 @@ class ViewController: UIViewController {
             if activeButtonsCount == 0 {
                 for index in cardButtons.indices {
                     let button = cardButtons[index]
-                    if button.isHidden == false {
-                        button.isHidden = true
+                    if button.isEnabled {
+                        button.isEnabled = false
                     }
                 }
                 newGameButton.isHidden = false
             }
         }
     }
-    
-    private var emojiChoices = ThemeGenerator.getTheme()
-    
-    private var emojiDict = [Int:String]()
     
     private func emojiForCard(for card: Card) -> String {
         if emojiDict[card.id] == nil && emojiChoices.count > 0 {

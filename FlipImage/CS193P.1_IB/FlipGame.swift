@@ -12,8 +12,6 @@ struct FlipGame {
     
     private(set) var cards = [Card]()
     
-    
-    
     private var indexOfFaceUpCard: Int? {
         get {
             var foundIndex: Int?
