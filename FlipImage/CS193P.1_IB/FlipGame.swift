@@ -40,6 +40,7 @@ class FlipGame {
     }
     
     func chooseCard(at index: Int) {
+        assert(cards.indices.contains(index), "FlipGame.chooseCard(at: \(index): chosen index not in the cards")
         if !cards[index].isMatched {
             if let matchIndex = indexOfFaceUpCard, matchIndex != index {
                 if cards[index].id == cards[matchIndex].id {
@@ -59,6 +60,7 @@ class FlipGame {
     }
     
     init(numberOfPairsOfCard: Int) {
+        assert(numberOfPairsOfCard > 0, "FlipGame.init(\((numberOfPairsOfCard)): must have positive value")
         for _ in 0..<numberOfPairsOfCard {
             let card = Card()
             cards += [card, card]
