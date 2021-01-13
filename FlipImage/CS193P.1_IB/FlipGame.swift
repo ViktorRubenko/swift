@@ -11,6 +11,10 @@ import Foundation
 struct FlipGame {
     
     private(set) var cards = [Card]()
+    private(set) var flipCount = 0
+    private(set) var score = 0
+    private var startToScore = false
+    private var seenCards = Set<Int>()
     
     private var indexOfFaceUpCard: Int? {
         get {
@@ -39,6 +43,10 @@ struct FlipGame {
             cards[index].isFaceUp = false
         }
         cards.shuffle()
+        flipCount = 0
+        seenCards.removeAll()
+        score = 0
+        startToScore = false
     }
     
     mutating func chooseCard(at index: Int) {
@@ -48,10 +56,15 @@ struct FlipGame {
                 if cards[index].id == cards[matchIndex].id {
                     cards[index].isMatched = true
                     cards[matchIndex].isMatched = true
+                    score += 3
+                    startToScore = true
                 }
                 cards[index].isFaceUp = true
             } else {
                 indexOfFaceUpCard = index
+            }
+            if startToScore && seenCards.contains(index){
+                score -= 1
             }
         } else {
             // for last faceUp matched pair
@@ -59,6 +72,8 @@ struct FlipGame {
                 cards[flipDownIndex].isFaceUp = false
             }
         }
+        flipCount += 1
+        seenCards.insert(index)
     }
     
     init(numberOfPairsOfCard: Int) {

@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     private var emojiDict = [Int:String]()
     
     @IBOutlet private weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var scoreLabel: UILabel!
     
     @IBOutlet private var cardButtons: [UIButton]!
     
@@ -25,12 +26,6 @@ class ViewController: UIViewController {
     
     var numberOfPairsOfCards: Int {
         return (cardButtons.count + 1) / 2
-    }
-    
-    private(set) var flipCount: Int = 0 {
-        didSet {
-            flipCountLabel.text = "Flips: \(flipCount)"
-        }
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
@@ -44,7 +39,6 @@ class ViewController: UIViewController {
     
     // MARK: Handle Card Touch Behavoir
     @IBAction func touchCard(_ sender: UIButton) {
-        flipCount += 1
         if let cardNumber = cardButtons.firstIndex(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -57,7 +51,6 @@ class ViewController: UIViewController {
     private func refreshView() {
         newGameButton.isHidden = true
         activeButtonsCount = cardButtons.count
-        flipCount = 0
         for button in cardButtons {
             button.isEnabled = true
         }
@@ -71,6 +64,10 @@ class ViewController: UIViewController {
             button.isEnabled = false
         }
         for index in cardButtons.indices {
+            
+            flipCountLabel.text = "Flips: \(game.flipCount)"
+            scoreLabel.text = "Score: \(game.score)"
+            
             let button = cardButtons[index]
             let card = game.cards[index]
             if card.isFaceUp {
