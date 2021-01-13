@@ -64,6 +64,12 @@ class ViewController: UIViewController {
     }
     
     private func updateViewFromModel() {
+        
+        func hide_button(_ button: UIButton) {
+            button.setTitle(nil, for: .normal)
+            button.backgroundColor = .clear
+            button.isEnabled = false
+        }
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
@@ -76,9 +82,7 @@ class ViewController: UIViewController {
                     button.backgroundColor = UIColor.systemOrange
                 }
                 if card.isMatched && button.isEnabled{
-                    button.setTitle(nil, for: .normal)
-                    button.backgroundColor = .clear
-                    button.isEnabled = false
+                    hide_button(button)
                 }
             }
             if card.isMatched && button.isEnabled{
@@ -89,7 +93,7 @@ class ViewController: UIViewController {
                 for index in cardButtons.indices {
                     let button = cardButtons[index]
                     if button.isEnabled {
-                        button.isEnabled = false
+                        hide_button(button)
                     }
                 }
                 newGameButton.isHidden = false
