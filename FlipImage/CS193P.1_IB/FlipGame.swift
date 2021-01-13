@@ -51,26 +51,31 @@ struct FlipGame {
     
     mutating func chooseCard(at index: Int) {
         assert(cards.indices.contains(index), "FlipGame.chooseCard(at: \(index): chosen index not in the cards")
+        var points = 0
+        if seenCards.contains(index) {
+            points -= 1
+        }
         if !cards[index].isMatched {
             if let matchIndex = indexOfFaceUpCard, matchIndex != index {
                 if cards[index].id == cards[matchIndex].id {
                     cards[index].isMatched = true
                     cards[matchIndex].isMatched = true
-                    score += 3
+                    points = 2
                     startToScore = true
                 }
                 cards[index].isFaceUp = true
             } else {
+                points = 0
                 indexOfFaceUpCard = index
-            }
-            if startToScore && seenCards.contains(index){
-                score -= 1
             }
         } else {
             // for last faceUp matched pair
             for flipDownIndex in cards.indices {
                 cards[flipDownIndex].isFaceUp = false
             }
+        }
+        if startToScore {
+            score += points
         }
         flipCount += 1
         seenCards.insert(index)

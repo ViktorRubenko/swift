@@ -64,10 +64,6 @@ class ViewController: UIViewController {
             button.isEnabled = false
         }
         for index in cardButtons.indices {
-            
-            flipCountLabel.text = "Flips: \(game.flipCount)"
-            scoreLabel.text = "Score: \(game.score)"
-            
             let button = cardButtons[index]
             let card = game.cards[index]
             if card.isFaceUp {
@@ -95,6 +91,8 @@ class ViewController: UIViewController {
                 }
                 newGameButton.isHidden = false
             }
+            flipCountLabel.text = "Flips: \(game.flipCount)"
+            scoreLabel.text = "Score: \(game.score)"
         }
     }
     
