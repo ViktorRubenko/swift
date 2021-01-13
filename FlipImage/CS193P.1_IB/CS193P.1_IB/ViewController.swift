@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     
     private var emojiChoices = ThemeGenerator().getTheme()
     
-    private var emojiDict = [Int:String]()
+    private var emojiDict = [Card:String]()
     
     @IBOutlet private weak var flipCountLabel: UILabel!
     @IBOutlet private weak var scoreLabel: UILabel!
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     
     @IBAction func startNewGame(_ sender: UIButton) {
         emojiChoices = ThemeGenerator().getTheme()
-        emojiDict = [Int:String]()
+        emojiDict = [Card:String]()
         activeButtonsCount = cardButtons.count
         game.refresh()
         refreshView()
@@ -97,11 +97,11 @@ class ViewController: UIViewController {
     }
     
     private func emojiForCard(for card: Card) -> String {
-        if emojiDict[card.id] == nil && emojiChoices.count > 0 {
+        if emojiDict[card] == nil && emojiChoices.count > 0 {
             let random_index = emojiChoices.count.arc4random
-            emojiDict[card.id] = emojiChoices.remove(at: random_index)
+            emojiDict[card] = emojiChoices.remove(at: random_index)
         }
-        return emojiDict[card.id] ?? "?"
+        return emojiDict[card] ?? "?"
     }
     
 }
