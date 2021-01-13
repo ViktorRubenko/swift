@@ -9,26 +9,23 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    lazy var game = FlipGame(numberOfPairsOfCard: numberOfPairsOfCards)
+    private lazy var game = FlipGame(numberOfPairsOfCard: numberOfPairsOfCards)
     
-    lazy var activeButtonsCount = cardButtons.count
+    private(set) lazy var activeButtonsCount = cardButtons.count
     
-    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var flipCountLabel: UILabel!
     
-    @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet private var cardButtons: [UIButton]!
     
-    @IBOutlet var newGameButton: UIButton!
+    @IBOutlet private var newGameButton: UIButton!
     
     var numberOfPairsOfCards: Int {
-        
         return (cardButtons.count + 1) / 2
-        
     }
     
-    var flipCount: Int = 0 {
+    private(set) var flipCount: Int = 0 {
         didSet {
             flipCountLabel.text = "Flips: \(flipCount)"
-            
         }
     }
     
@@ -51,7 +48,7 @@ class ViewController: UIViewController {
         
     }
     
-    func refreshView() {
+    private func refreshView() {
         newGameButton.isHidden = true
         activeButtonsCount = cardButtons.count
         flipCount = 0
@@ -60,7 +57,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func updateViewFromModel() {
+    private func updateViewFromModel() {
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
@@ -84,11 +81,11 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoices = ["💩", "🐨", "🐷", "🦊", "🐶", "🐮", "🐼"]
+    private var emojiChoices = ["💩", "🐨", "🐷", "🦊", "🐶", "🐮", "🐼"]
     
-    var emojiDict = [Int:String]()
+    private var emojiDict = [Int:String]()
     
-    func emojiForCard(for card: Card) -> String {
+    private func emojiForCard(for card: Card) -> String {
         if emojiDict[card.id] == nil && emojiChoices.count > 0 {
             let random_index = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             emojiDict[card.id] = emojiChoices.remove(at: random_index)

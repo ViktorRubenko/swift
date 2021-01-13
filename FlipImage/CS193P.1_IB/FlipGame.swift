@@ -9,9 +9,9 @@ import Foundation
 
 
 class FlipGame {
-    var cards = [Card]()
+    private(set) var cards = [Card]()
     
-    var indexOfFaceUpCard: Int? {
+    private var indexOfFaceUpCard: Int? {
         get {
             var foundIndex: Int?
             for card in cards{
