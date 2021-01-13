@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    lazy var game = FlipGame(numberOfPairsOfCard: (cardButtons.count + 1) / 2)
+    lazy var game = FlipGame(numberOfPairsOfCard: numberOfPairsOfCards)
     
     lazy var activeButtonsCount = cardButtons.count
     
@@ -18,6 +18,12 @@ class ViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     
     @IBOutlet var newGameButton: UIButton!
+    
+    var numberOfPairsOfCards: Int {
+        
+        return (cardButtons.count + 1) / 2
+        
+    }
     
     var flipCount: Int = 0 {
         didSet {

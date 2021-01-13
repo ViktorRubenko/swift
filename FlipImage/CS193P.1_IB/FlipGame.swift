@@ -11,7 +11,26 @@ import Foundation
 class FlipGame {
     var cards = [Card]()
     
-    var indexOfFaceUpCard: Int?
+    var indexOfFaceUpCard: Int? {
+        get {
+            var foundIndex: Int?
+            for card in cards{
+                if card.isFaceUp {
+                    if foundIndex == nil {
+                        foundIndex = card.id
+                    } else {
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+        }
+        set(newValue) {
+            for indexOfCard in cards.indices{
+                cards[indexOfCard].isFaceUp = (indexOfCard == newValue)
+            }
+        }
+    }
     
     func refresh() {
         for index in cards.indices {
@@ -28,13 +47,7 @@ class FlipGame {
                     cards[matchIndex].isMatched = true
                 }
                 cards[index].isFaceUp = true
-                indexOfFaceUpCard = nil
             } else {
-                // if not cards faceUp or 2 are face up
-                for flipDownIndex in cards.indices {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
                 indexOfFaceUpCard = index
             }
         } else {
