@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         updateViewFromModel()
     }
     
-    // MARK: Handle Card Ouch Behavoir
+    // MARK: Handle Card Touch Behavoir
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         activeButtonsCount = cardButtons.count
         flipCount = 0
         for button in cardButtons {
-            button.isEnabled = true
+            button.isHidden = false
         }
     }
     
@@ -74,7 +74,13 @@ class ViewController: UIViewController {
                     button.isEnabled = false
                     activeButtonsCount -= 1
                 }
-                if activeButtonsCount == 0 {
+                if activeButtonsCount == 2 {
+                    for index in cardButtons.indices {
+                        let button = cardButtons[index]
+                        if button.isHidden == false {
+                            button.isHidden = true
+                        }
+                    }
                     newGameButton.isHidden = false
                 }
             }

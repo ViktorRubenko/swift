@@ -8,8 +8,11 @@
 import Foundation
 
 
-class FlipGame {
+struct FlipGame {
+    
     private(set) var cards = [Card]()
+    
+    
     
     private var indexOfFaceUpCard: Int? {
         get {
@@ -32,14 +35,14 @@ class FlipGame {
         }
     }
     
-    func refresh() {
+    mutating func refresh() {
         for index in cards.indices {
             cards[index].isMatched = false
             cards[index].isFaceUp = false
         }
     }
     
-    func chooseCard(at index: Int) {
+    mutating func chooseCard(at index: Int) {
         assert(cards.indices.contains(index), "FlipGame.chooseCard(at: \(index): chosen index not in the cards")
         if !cards[index].isMatched {
             if let matchIndex = indexOfFaceUpCard, matchIndex != index {
