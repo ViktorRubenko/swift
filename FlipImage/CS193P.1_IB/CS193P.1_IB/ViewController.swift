@@ -70,19 +70,23 @@ class ViewController: UIViewController {
                     button.backgroundColor = UIColor.systemOrange
                 }
                 if card.isMatched && button.isEnabled{
+                    button.setTitle(nil, for: .normal)
                     button.backgroundColor = .clear
                     button.isEnabled = false
-                    activeButtonsCount -= 1
                 }
-                if activeButtonsCount == 2 {
-                    for index in cardButtons.indices {
-                        let button = cardButtons[index]
-                        if button.isHidden == false {
-                            button.isHidden = true
-                        }
+            }
+            if card.isMatched && button.isEnabled{
+                activeButtonsCount -= 1
+            }
+            // Hide 2 last cards right after the last card tap
+            if activeButtonsCount == 0 {
+                for index in cardButtons.indices {
+                    let button = cardButtons[index]
+                    if button.isHidden == false {
+                        button.isHidden = true
                     }
-                    newGameButton.isHidden = false
                 }
+                newGameButton.isHidden = false
             }
         }
     }
