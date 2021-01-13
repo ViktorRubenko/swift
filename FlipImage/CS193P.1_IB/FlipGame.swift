@@ -14,10 +14,10 @@ class FlipGame {
     private var indexOfFaceUpCard: Int? {
         get {
             var foundIndex: Int?
-            for card in cards{
-                if card.isFaceUp {
+            for indexOfCard in cards.indices{
+                if cards[indexOfCard].isFaceUp {
                     if foundIndex == nil {
-                        foundIndex = card.id
+                        foundIndex = indexOfCard
                     } else {
                         return nil
                     }
