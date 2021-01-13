@@ -57,7 +57,7 @@ struct FlipGame {
         }
         if !cards[index].isMatched {
             if let matchIndex = indexOfFaceUpCard, matchIndex != index {
-                if cards[index].id == cards[matchIndex].id {
+                if cards[index] == cards[matchIndex] {
                     cards[index].isMatched = true
                     cards[matchIndex].isMatched = true
                     points = 2
