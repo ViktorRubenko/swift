@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     private(set) lazy var activeButtonsCount = cardButtons.count
     
-    private var emojiChoices = ThemeGenerator.getTheme()
+    private var emojiChoices = ThemeGenerator().getTheme()
     
     private var emojiDict = [Int:String]()
     
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
-        emojiChoices = ThemeGenerator.getTheme()
+        emojiChoices = ThemeGenerator().getTheme()
         emojiDict = [Int:String]()
         activeButtonsCount = cardButtons.count
         game.refresh()

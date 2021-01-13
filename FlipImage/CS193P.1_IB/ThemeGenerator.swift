@@ -8,22 +8,17 @@
 import Foundation
 
 
-enum ThemeGenerator: CaseIterable {
-    case animals
-    case sports
-    case faces
+struct ThemeGenerator {
     
-    static func getTheme() -> [String] {
-        let theme = ThemeGenerator.allCases.randomElement()!
-        var emoji = ""
-        switch theme {
-        case .animals:
-            emoji = "🐮 🐶 🦊 🐷 🐨 🐻 🐸 🐯"
-        case .sports:
-            emoji = "⛸ ⚽️ 🏈 🥎 ⚾️ 🏉 🥏 🏓"
-        case .faces:
-            emoji = "😀 😂 😍 😎 🤩 🤢 🤐 🙄"
-        }
-        return emoji.components(separatedBy: " ").shuffled()
+    private(set) var emojiDict = [String:String]()
+    
+    init() {
+        emojiDict["animals"] = "🐮 🐶 🦊 🐷 🐨 🐻 🐸 🐯"
+        emojiDict["sports"] = "⛸ ⚽️ 🏈 🥎 ⚾️ 🏉 🥏 🏓"
+        emojiDict["faces"] = "😀 😂 😍 😎 🤩 🤢 🤐 🙄"
+    }
+    
+    func getTheme() -> [String] {
+        return emojiDict.values.randomElement()!.components(separatedBy: " ")
     }
 }
