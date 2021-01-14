@@ -7,15 +7,32 @@
 
 import UIKit
 
+typealias Theme = (emoji: [String], cardBackColor: UIColor, backgroundColor: UIColor)
+
+fileprivate var themes: [String: Theme] = [
+    "animals": (emoji: "🐮 🐶 🦊 🐷 🐨 🐻 🐸 🐯".components(separatedBy: " "), cardBackColor: .yellow, backgroundColor: .green),
+    "sports": (emoji: "⛸ ⚽️ 🏈 🥎 ⚾️ 🏉 🥏 🏓".components(separatedBy: " "), cardBackColor: .red, backgroundColor: .blue),
+    "face": (emoji: "😀 😂 😍 😎 🤩 🤢 🤐 🙄".components(separatedBy: " "), cardBackColor: .cyan, backgroundColor: .orange),
+]
+
 class ViewController: UIViewController {
     
     private lazy var game = FlipGame(numberOfPairsOfCard: numberOfPairsOfCards)
     
     private(set) lazy var activeButtonsCount = cardButtons.count
     
-    private var emojiChoices = ThemeGenerator().getTheme()
-    
+    private var cardBackColor = UIColor.systemOrange
+    private var viewBackgroundColor = UIColor.systemGray
+    private var emojiChoices = [String]()
     private var emojiDict = [Card:String]()
+    
+    private var themeKey = "animals" {
+        didSet{
+            (emojiChoices, cardBackColor, viewBackgroundColor) = themes[themeKey]!
+            updateAppearance()
+            print(emojiChoices, cardBackColor, viewBackgroundColor)
+        }
+    }
     
     @IBOutlet private weak var flipCountLabel: UILabel!
     @IBOutlet private weak var scoreLabel: UILabel!
@@ -28,9 +45,14 @@ class ViewController: UIViewController {
         return (cardButtons.count + 1) / 2
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        themeKey = themes.keys.randomElement()!
+        updateViewFromModel()
+    }
+    
     @IBAction func startNewGame(_ sender: UIButton) {
-        emojiChoices = ThemeGenerator().getTheme()
         emojiDict = [Card:String]()
+        themeKey = themes.keys.randomElement()!
         activeButtonsCount = cardButtons.count
         game.refresh()
         refreshView()
@@ -46,6 +68,14 @@ class ViewController: UIViewController {
             print("chosen card is not in cardButtons")
         }
         
+    }
+    
+    private func updateAppearance(){
+        view.backgroundColor = viewBackgroundColor
+        flipCountLabel.textColor = cardBackColor
+        scoreLabel.textColor = cardBackColor
+        newGameButton.backgroundColor = cardBackColor
+        newGameButton.setTitleColor(viewBackgroundColor, for: .normal)
     }
     
     private func refreshView() {
@@ -72,7 +102,7 @@ class ViewController: UIViewController {
             } else {
                 button.setTitle(nil, for: .normal)
                 if button.isEnabled {
-                    button.backgroundColor = UIColor.systemOrange
+                    button.backgroundColor = cardBackColor
                 }
                 if card.isMatched && button.isEnabled{
                     hide_button(button)
@@ -101,6 +131,7 @@ class ViewController: UIViewController {
             let random_index = emojiChoices.count.arc4random
             emojiDict[card] = emojiChoices.remove(at: random_index)
         }
+        print(emojiDict)
         return emojiDict[card] ?? "?"
     }
     

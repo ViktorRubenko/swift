@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		573BBD7825AF81BE00A18BBC /* ThemeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573BBD7725AF81BE00A18BBC /* ThemeGenerator.swift */; };
 		5757D52825AD026B00206B8E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5757D52725AD026B00206B8E /* Card.swift */; };
 		5757D52C25AD07C700206B8E /* FlipGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5757D52B25AD07C700206B8E /* FlipGame.swift */; };
 		57D7E8C425ACA4150003971E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D7E8C325ACA4150003971E /* AppDelegate.swift */; };
@@ -19,7 +18,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		573BBD7725AF81BE00A18BBC /* ThemeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeGenerator.swift; sourceTree = SOURCE_ROOT; };
 		5757D52725AD026B00206B8E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = SOURCE_ROOT; };
 		5757D52B25AD07C700206B8E /* FlipGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipGame.swift; sourceTree = SOURCE_ROOT; };
 		57D7E8C025ACA4150003971E /* CS193P.1_IB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CS193P.1_IB.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,7 +60,6 @@
 		57D7E8C225ACA4150003971E /* CS193P.1_IB */ = {
 			isa = PBXGroup;
 			children = (
-				573BBD7725AF81BE00A18BBC /* ThemeGenerator.swift */,
 				5757D52B25AD07C700206B8E /* FlipGame.swift */,
 				5757D52725AD026B00206B8E /* Card.swift */,
 				57D7E8C325ACA4150003971E /* AppDelegate.swift */,
@@ -149,7 +146,6 @@
 				5757D52C25AD07C700206B8E /* FlipGame.swift in Sources */,
 				57D7E8C825ACA4150003971E /* ViewController.swift in Sources */,
 				5757D52825AD026B00206B8E /* Card.swift in Sources */,
-				573BBD7825AF81BE00A18BBC /* ThemeGenerator.swift in Sources */,
 				57D7E8C425ACA4150003971E /* AppDelegate.swift in Sources */,
 				57D7E8C625ACA4150003971E /* SceneDelegate.swift in Sources */,
 			);
