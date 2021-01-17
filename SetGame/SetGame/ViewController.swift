@@ -9,9 +9,22 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var cardButtons: [BorderButton]!
+    
+    @IBAction func chooseCard(_ sender: BorderButton) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        updateViewFromModel()
+    }
+    
+    private func updateViewFromModel(){
+        for buttonIndex in cardButtons.indices {
+            let button = cardButtons[buttonIndex]
+            button.setTitle(String(buttonIndex), for: .normal)
+        }
     }
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5731A14625B4DFA800DF9939 /* BorderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731A14525B4DFA800DF9939 /* BorderLabel.swift */; };
 		578430A025B4D75600F813F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784309F25B4D75600F813F4 /* AppDelegate.swift */; };
 		578430A225B4D75600F813F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578430A125B4D75600F813F4 /* SceneDelegate.swift */; };
 		578430A425B4D75600F813F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578430A325B4D75600F813F4 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5731A14525B4DFA800DF9939 /* BorderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderLabel.swift; sourceTree = "<group>"; };
 		5784309C25B4D75600F813F4 /* SetGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784309F25B4D75600F813F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		578430A125B4D75600F813F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				578430B425B4D76500F813F4 /* SupportingFiles */,
 				578430A325B4D75600F813F4 /* ViewController.swift */,
 				578430B525B4D78A00F813F4 /* BorderButton.swift */,
+				5731A14525B4DFA800DF9939 /* BorderLabel.swift */,
 				578430A525B4D75600F813F4 /* Main.storyboard */,
 				578430A825B4D75A00F813F4 /* Assets.xcassets */,
 				578430AD25B4D75A00F813F4 /* Info.plist */,
@@ -152,6 +155,7 @@
 				578430A025B4D75600F813F4 /* AppDelegate.swift in Sources */,
 				578430A225B4D75600F813F4 /* SceneDelegate.swift in Sources */,
 				578430BD25B4D9FC00F813F4 /* BorderButton.swift in Sources */,
+				5731A14625B4DFA800DF9939 /* BorderLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
