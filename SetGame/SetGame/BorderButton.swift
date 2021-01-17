@@ -9,9 +9,9 @@ import UIKit
 
 
 @IBDesignable class BorderButton: UIButton {
-    @IBInspectable var borderColor: CGColor = DefaultValues.borderColor {
+    @IBInspectable var borderColor: UIColor = DefaultValues.borderColor {
         didSet {
-            layer.borderColor = borderColor
+            layer.borderColor = borderColor.cgColor
         }
     }
     
@@ -38,14 +38,14 @@ import UIKit
     }
     
     private func init_config() {
-        layer.borderColor = borderColor
+        layer.borderColor = borderColor.cgColor
         layer.borderWidth = borderWidth
         layer.cornerRadius = cornerRadius
         clipsToBounds = true
     }
     
     private struct DefaultValues {
-        static let borderColor: CGColor = UIColor.green.cgColor
+        static let borderColor: UIColor = UIColor.green
         static let borderWidth: CGFloat = 3.0
         static let cornerRadius: CGFloat = 7.0
     }
