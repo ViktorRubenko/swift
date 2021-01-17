@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  SetGame
+//  PlayingCards
 //
 //  Created by Victor Rubenko on 17.01.2021.
 //
