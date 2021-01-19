@@ -45,7 +45,7 @@ import UIKit
     }
     
     private struct DefaultValues {
-        static let borderColor: UIColor = UIColor.green
+        static let borderColor: UIColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         static let borderWidth: CGFloat = 3.0
         static let cornerRadius: CGFloat = 7.0
     }
