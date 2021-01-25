@@ -42,6 +42,11 @@ class PlayingCardView: UIView {
         label.isHidden = !isFaceUp
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        setNeedsDisplay()
+        setNeedsLayout()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -52,7 +57,6 @@ class PlayingCardView: UIView {
         lowerRightCornerLabel.frame.origin = CGPoint(x: bounds.maxX, y: bounds.maxY).offsetBy(dx: -cornerOffset, dy: -cornerOffset).offsetBy(dx: -lowerRightCornerLabel.frame.size.width, dy: -lowerRightCornerLabel.frame.size.height)
         lowerRightCornerLabel.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         
-        setNeedsDisplay()
     }
     
     override func draw(_ rect: CGRect) {
