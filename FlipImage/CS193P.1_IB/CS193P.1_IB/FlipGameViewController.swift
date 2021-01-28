@@ -7,15 +7,8 @@
 
 import UIKit
 
-typealias Theme = (emoji: [String], cardBackColor: UIColor, backgroundColor: UIColor)
 
-fileprivate var themes: [String: Theme] = [
-    "animals": (emoji: "🐮 🐶 🦊 🐷 🐨 🐻 🐸 🐯".components(separatedBy: " "), cardBackColor: .yellow, backgroundColor: .green),
-    "sports": (emoji: "⛸ ⚽️ 🏈 🥎 ⚾️ 🏉 🥏 🏓".components(separatedBy: " "), cardBackColor: .red, backgroundColor: .blue),
-    "face": (emoji: "😀 😂 😍 😎 🤩 🤢 🤐 🙄".components(separatedBy: " "), cardBackColor: .cyan, backgroundColor: .orange),
-]
-
-class ViewController: UIViewController {
+class FlipGameViewController: UIViewController {
     
     private lazy var game = FlipGame(numberOfPairsOfCard: numberOfPairsOfCards)
     
@@ -26,11 +19,11 @@ class ViewController: UIViewController {
     private var emojiChoices = [String]()
     private var emojiDict = [Card:String]()
     
-    private var themeKey = "animals" {
+    var theme: Theme? = nil {
         didSet{
-            (emojiChoices, cardBackColor, viewBackgroundColor) = themes[themeKey]!
+            (emojiChoices, cardBackColor, viewBackgroundColor) = theme!
             updateAppearance()
-            print(emojiChoices, cardBackColor, viewBackgroundColor)
+//            print(emojiChoices, cardBackColor, viewBackgroundColor)
         }
     }
     
@@ -46,13 +39,13 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        themeKey = themes.keys.randomElement()!
+//        themeKey = themes.keys.randomElement()!
         updateViewFromModel()
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
         emojiDict = [Card:String]()
-        themeKey = themes.keys.randomElement()!
+//        themeKey = themes.keys.randomElement()!
         activeButtonsCount = cardButtons.count
         game.refresh()
         refreshView()

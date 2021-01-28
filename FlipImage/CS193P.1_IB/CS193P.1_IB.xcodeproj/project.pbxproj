@@ -7,23 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5738D06D25C1E4D500D4E492 /* FlipGameThemeChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5738D06C25C1E4D500D4E492 /* FlipGameThemeChooserViewController.swift */; };
+		5738D07225C1ED9600D4E492 /* FlipGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D7E8C725ACA4150003971E /* FlipGameViewController.swift */; };
 		5757D52825AD026B00206B8E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5757D52725AD026B00206B8E /* Card.swift */; };
 		5757D52C25AD07C700206B8E /* FlipGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5757D52B25AD07C700206B8E /* FlipGame.swift */; };
 		57D7E8C425ACA4150003971E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D7E8C325ACA4150003971E /* AppDelegate.swift */; };
 		57D7E8C625ACA4150003971E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D7E8C525ACA4150003971E /* SceneDelegate.swift */; };
-		57D7E8C825ACA4150003971E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D7E8C725ACA4150003971E /* ViewController.swift */; };
 		57D7E8CB25ACA4150003971E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57D7E8C925ACA4150003971E /* Main.storyboard */; };
 		57D7E8CD25ACA41C0003971E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57D7E8CC25ACA41C0003971E /* Assets.xcassets */; };
 		57D7E8D025ACA41C0003971E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57D7E8CE25ACA41C0003971E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5738D06C25C1E4D500D4E492 /* FlipGameThemeChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipGameThemeChooserViewController.swift; sourceTree = "<group>"; };
 		5757D52725AD026B00206B8E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = SOURCE_ROOT; };
 		5757D52B25AD07C700206B8E /* FlipGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipGame.swift; sourceTree = SOURCE_ROOT; };
 		57D7E8C025ACA4150003971E /* CS193P.1_IB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CS193P.1_IB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D7E8C325ACA4150003971E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57D7E8C525ACA4150003971E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		57D7E8C725ACA4150003971E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		57D7E8C725ACA4150003971E /* FlipGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipGameViewController.swift; sourceTree = "<group>"; };
 		57D7E8CA25ACA4150003971E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		57D7E8CC25ACA41C0003971E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57D7E8CF25ACA41C0003971E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -64,8 +66,9 @@
 				5757D52725AD026B00206B8E /* Card.swift */,
 				57D7E8C325ACA4150003971E /* AppDelegate.swift */,
 				57D7E8C525ACA4150003971E /* SceneDelegate.swift */,
-				57D7E8C725ACA4150003971E /* ViewController.swift */,
+				57D7E8C725ACA4150003971E /* FlipGameViewController.swift */,
 				57D7E8C925ACA4150003971E /* Main.storyboard */,
+				5738D06C25C1E4D500D4E492 /* FlipGameThemeChooserViewController.swift */,
 				57D7E8CC25ACA41C0003971E /* Assets.xcassets */,
 				57D7E8CE25ACA41C0003971E /* LaunchScreen.storyboard */,
 				57D7E8D125ACA41C0003971E /* Info.plist */,
@@ -144,10 +147,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5757D52C25AD07C700206B8E /* FlipGame.swift in Sources */,
-				57D7E8C825ACA4150003971E /* ViewController.swift in Sources */,
 				5757D52825AD026B00206B8E /* Card.swift in Sources */,
+				5738D06D25C1E4D500D4E492 /* FlipGameThemeChooserViewController.swift in Sources */,
 				57D7E8C425ACA4150003971E /* AppDelegate.swift in Sources */,
 				57D7E8C625ACA4150003971E /* SceneDelegate.swift in Sources */,
+				5738D07225C1ED9600D4E492 /* FlipGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +299,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GW7LHNH94F;
 				INFOPLIST_FILE = CS193P.1_IB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,7 +309,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ViktorRubenko.CS193P-1-IB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -313,7 +319,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GW7LHNH94F;
 				INFOPLIST_FILE = CS193P.1_IB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -321,7 +329,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ViktorRubenko.CS193P-1-IB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
