@@ -9,9 +9,16 @@ import Foundation
 
 
 struct SetGame {
-    private let deck = SetCardDeck()
-    private var cardsSelected = [SetCard]()
+    private var deck = SetCardDeck()
+    private(set) var cardsLastSet = [SetCard]()
+    private(set) var cardsSelected = [SetCard]() {
+        didSet {
+            isSet = calculateSet()
+        }
+    }
+    private(set) var cardsInGame = [SetCard]()
     private(set) var isSet = false
+    var startCardsCount = 12
         
     private func calculateSet() -> Bool {
         if cardsSelected.count == 3 {
@@ -26,20 +33,48 @@ struct SetGame {
         return false
     }
     
+    init() {
+        for _ in 0..<startCardsCount {
+            addCard()
+        }
+    }
+    
+    mutating func addCard(){
+        if let card = deck.getCard() {
+            cardsInGame.append(card)
+        }
+    }
+    
+    mutating func drop(){
+        for card in cardsSelected {
+            cardsInGame.removeAll(where: { $0 == card } )
+        }
+        print(cardsInGame.count)
+    }
+    
     mutating func chooseCard(card: SetCard?) {
         guard let card = card else {
             return
         }
         switch cardsSelected.count {
         case 3:
-            isSet = calculateSet()
+            if isSet {
+                cardsLastSet.removeAll()
+                cardsLastSet += cardsSelected
+            } else {
+                cardsLastSet.removeAll()
+            }
             cardsSelected.removeAll()
-            fallthrough
+            cardsSelected.append(card)
         default:
+            if cardsLastSet.count != 0 {
+                cardsLastSet.removeAll()
+            }
             if cardsSelected.contains(card){
                 cardsSelected.removeAll(where: { $0 == card })
+            } else {
+                cardsSelected.append(card)
             }
-            cardsSelected.append(card)
         }
     }
 }

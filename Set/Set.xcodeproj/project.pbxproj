@@ -7,18 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		573A022A25C60BEF00B2063E /* SetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573A022625C60B8400B2063E /* SetCardView.swift */; };
 		573C750825C3424F0041E835 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C750725C3424F0041E835 /* AppDelegate.swift */; };
 		573C750A25C3424F0041E835 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C750925C3424F0041E835 /* SceneDelegate.swift */; };
-		573C750C25C3424F0041E835 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C750B25C3424F0041E835 /* ViewController.swift */; };
 		573C750F25C3424F0041E835 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 573C750D25C3424F0041E835 /* Main.storyboard */; };
 		573C751125C342540041E835 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 573C751025C342540041E835 /* Assets.xcassets */; };
 		573C751425C342540041E835 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 573C751225C342540041E835 /* LaunchScreen.storyboard */; };
 		573C752025C342B40041E835 /* SetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C751F25C342B40041E835 /* SetCard.swift */; };
 		573C752425C345FE0041E835 /* SetCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C752325C345FE0041E835 /* SetCardDeck.swift */; };
 		573C752725C348310041E835 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C752625C348310041E835 /* SetGame.swift */; };
+		573D310925C730FE006B7C71 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573D310825C730FE006B7C71 /* Grid.swift */; };
+		573D310C25C731C1006B7C71 /* SetCardBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573D310B25C731C1006B7C71 /* SetCardBoardView.swift */; };
+		57636BE525C9CE0F00875E9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C750B25C3424F0041E835 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		573A022625C60B8400B2063E /* SetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCardView.swift; sourceTree = "<group>"; };
 		573C750425C3424F0041E835 /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		573C750725C3424F0041E835 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		573C750925C3424F0041E835 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +34,8 @@
 		573C751F25C342B40041E835 /* SetCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCard.swift; sourceTree = "<group>"; };
 		573C752325C345FE0041E835 /* SetCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCardDeck.swift; sourceTree = "<group>"; };
 		573C752625C348310041E835 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
+		573D310825C730FE006B7C71 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		573D310B25C731C1006B7C71 /* SetCardBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCardBoardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		573A022525C60B4D00B2063E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				573A022625C60B8400B2063E /* SetCardView.swift */,
+				573D310B25C731C1006B7C71 /* SetCardBoardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		573C74FB25C3424E0041E835 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +80,8 @@
 				573C751E25C3429A0041E835 /* Model */,
 				573C751C25C3426C0041E835 /* SupportingFiles */,
 				573C750B25C3424F0041E835 /* ViewController.swift */,
+				573D310825C730FE006B7C71 /* Grid.swift */,
+				573A022525C60B4D00B2063E /* View */,
 				573C750D25C3424F0041E835 /* Main.storyboard */,
 				573C751025C342540041E835 /* Assets.xcassets */,
 				573C751525C342540041E835 /* Info.plist */,
@@ -163,7 +180,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				573C752425C345FE0041E835 /* SetCardDeck.swift in Sources */,
-				573C750C25C3424F0041E835 /* ViewController.swift in Sources */,
+				573D310C25C731C1006B7C71 /* SetCardBoardView.swift in Sources */,
+				573A022A25C60BEF00B2063E /* SetCardView.swift in Sources */,
+				57636BE525C9CE0F00875E9A /* ViewController.swift in Sources */,
+				573D310925C730FE006B7C71 /* Grid.swift in Sources */,
 				573C750825C3424F0041E835 /* AppDelegate.swift in Sources */,
 				573C752025C342B40041E835 /* SetCard.swift in Sources */,
 				573C752725C348310041E835 /* SetGame.swift in Sources */,

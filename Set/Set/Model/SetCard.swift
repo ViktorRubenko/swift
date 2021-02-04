@@ -24,7 +24,7 @@ struct SetCard: Hashable, CustomStringConvertible {
         case v1 = 1, v2, v3
         
         var index: Int {
-            return self.rawValue - 1
+            return self.rawValue
         }
     }
 }

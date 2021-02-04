@@ -27,4 +27,8 @@ struct SetCardDeck {
     mutating func getCard() -> SetCard? {
         return cards.popLast()
     }
+    
+    init() {
+        hangOut()
+    }
 }
