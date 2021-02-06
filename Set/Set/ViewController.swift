@@ -17,9 +17,44 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // WTF??? cardBoard has 1 card 
+        // WTF??? cardBoard has 1 card
+        addSwipeGestureRecognizer(for: cardBoard)
+        addRotationGestureRecognizer(for: cardBoard)
         cardBoard.cardViews.removeAll()
         updateViewFromModel()
+    }
+    
+    private func addRotationGestureRecognizer(for cardBoardView: SetCardBoardView) {
+        let rotation = UIRotationGestureRecognizer(target: self, action: #selector(shuffleBoard))
+        cardBoardView.addGestureRecognizer(rotation)
+    }
+    
+    @objc
+    private func shuffleBoard(_ sender: UIRotationGestureRecognizer?) {
+        switch sender?.state {
+        case .ended:
+            setGame.shuffleCards()
+            cardBoard.cardViews.removeAll()
+            updateViewFromModel()
+        default:
+            break
+        }
+    }
+    
+    private func addSwipeGestureRecognizer(for cardBoardView: SetCardBoardView) {
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeBoard))
+        swipe.direction = .down
+        cardBoardView.addGestureRecognizer(swipe)
+    }
+    
+    @objc
+    private func swipeBoard(_ sender: UISwipeGestureRecognizer?) {
+        switch sender?.state {
+        case .ended:
+            dealNewThree()
+        default:
+            break
+        }
     }
     
     private func addTapGestureRecognizer(for cardView: SetCardView) {
@@ -52,7 +87,6 @@ class ViewController: UIViewController {
     
     private func updateViewFromModel() {
         for index in cardBoard.cardViews.count..<setGame.cardsInGame.count {
-            print(index)
             let card = setGame.cardsInGame[index]
             let cardView = SetCardView()
             updateCardView(cardView, card: card)
@@ -78,20 +112,23 @@ class ViewController: UIViewController {
         for (index, cardView) in cardBoard.cardViews.enumerated() {
             let card = setGame.cardsInGame[index]
             if setGame.cardsSelected.contains(card) {
-                cardBoard.cardViews.removeAll(where: { $0 == cardView })
+                self.cardBoard.cardViews.removeAll(where: { $0 == cardView })
             }
         }
         setGame.drop()
     }
     
-    @IBAction func dealNewThree(_ sender: UIButton) {
-        if setGame.isSet {
+    private func dealNewThree() {
+        if setGame.cardsSelected.count > 0 && setGame.isSet {
             dropCards()
         }
         for _ in 0...2{
             setGame.addCard()
         }
         updateViewFromModel()
+    }
+    @IBAction func dealNewThreeAction(_ sender: UIButton) {
+        dealNewThree()
     }
 }
 

@@ -39,6 +39,10 @@ struct SetGame {
         }
     }
     
+    mutating func shuffleCards(){
+        cardsInGame.shuffle()
+    }
+    
     mutating func addCard(){
         if let card = deck.getCard() {
             cardsInGame.append(card)
@@ -49,7 +53,6 @@ struct SetGame {
         for card in cardsSelected {
             cardsInGame.removeAll(where: { $0 == card } )
         }
-        print(cardsInGame.count)
     }
     
     mutating func chooseCard(card: SetCard?) {

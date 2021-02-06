@@ -61,7 +61,7 @@
                                             <color key="titleColor" systemColor="labelColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="dealNewThree:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Sl-D7-c5E"/>
+                                            <action selector="dealNewThreeAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tdu-QK-KM6"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -85,7 +85,6 @@
                     </view>
                     <connections>
                         <outlet property="cardBoard" destination="DUD-SL-zAV" id="F1O-1V-nV7"/>
-                        <outlet property="dealThreeButton" destination="NcY-3g-CJk" id="0rt-vc-cHy"/>
                         <outlet property="scoreLabel" destination="965-1o-TNz" id="Qzp-x1-D5e"/>
                     </connections>
                 </viewController>
