@@ -32,3 +32,11 @@ struct SetCardDeck {
         hangOut()
     }
 }
+
+extension SetCardDeck {
+    init(addition: [SetCard]) {
+        hangOut()
+        cards = cards.filter({ !addition.contains($0) })
+        cards = cards + addition.reversed()
+    }
+}

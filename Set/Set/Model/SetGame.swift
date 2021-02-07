@@ -9,24 +9,59 @@ import Foundation
 
 
 struct SetGame {
-    private var deck = SetCardDeck()
+    private(set) var deck = SetCardDeck()
     private(set) var cardsLastSet = [SetCard]()
     private(set) var cardsSelected = [SetCard]() {
         didSet {
-            isSet = calculateSet()
+            isSet = calculateSet(for: cardsSelected)
         }
     }
     private(set) var cardsInGame = [SetCard]()
     private(set) var isSet = false
+    var setCount: Int {
+        var count = 0
+        for firstIndex in 0..<cardsInGame.count-2 {
+            let firstCard = cardsInGame[firstIndex]
+            for secondIndex in firstIndex+1..<cardsInGame.count-1 {
+                let secondCard = cardsInGame[secondIndex]
+                for thirdIndex in secondIndex+1..<cardsInGame.count {
+                    let thirdCard = cardsInGame[thirdIndex]
+                    if calculateSet(for: [firstCard, secondCard, thirdCard]) {
+                        count += 1
+                    }
+                }
+            }
+        }
+        return count
+    }
     var startCardsCount = 12
+    
+    mutating func findSet() {
+        for firstIndex in 0..<cardsInGame.count-2 {
+            let firstCard = cardsInGame[firstIndex]
+            for secondIndex in firstIndex+1..<cardsInGame.count-1 {
+                let secondCard = cardsInGame[secondIndex]
+                for thirdIndex in secondIndex+1..<cardsInGame.count {
+                    let thirdCard = cardsInGame[thirdIndex]
+                    if calculateSet(for: [firstCard, secondCard, thirdCard]) {
+                        cardsSelected.removeAll()
+                        for card in [firstCard, secondCard, thirdCard] {
+                            chooseCard(card: card)
+                        }
+                        return
+                    }
+                }
+            }
+        }
+    }
         
-    private func calculateSet() -> Bool {
-        if cardsSelected.count == 3 {
+    private func calculateSet(for cards: [SetCard]) -> Bool {
+        if cards.count == 3 {
             let concurences = [
-                cardsSelected.reduce(0, { $0 + $1.number.index}),
-                cardsSelected.reduce(0, { $0 + $1.shape.index}),
-                cardsSelected.reduce(0, { $0 + $1.shading.index}),
-                cardsSelected.reduce(0, { $0 + $1.color.index}),
+                cards.reduce(0, { $0 + $1.number.index}),
+                cards.reduce(0, { $0 + $1.shape.index}),
+                cards.reduce(0, { $0 + $1.shading.index}),
+                cards.reduce(0, { $0 + $1.color.index}),
             ]
             return concurences.reduce(true, { $0 && $1 % 3 == 0})
         }
@@ -34,6 +69,22 @@ struct SetGame {
     }
     
     init() {
+        addStartCards()
+    }
+    
+    mutating func clearSelected() {
+        cardsSelected.removeAll()
+    }
+    
+    mutating func newGame(reminder: Bool) {
+        deck = reminder ? SetCardDeck(addition: cardsInGame) : SetCardDeck()
+        cardsInGame.removeAll()
+        cardsSelected.removeAll()
+        cardsLastSet.removeAll()
+        addStartCards()
+    }
+    
+    mutating private func addStartCards() {
         for _ in 0..<startCardsCount {
             addCard()
         }
@@ -43,7 +94,7 @@ struct SetGame {
         cardsInGame.shuffle()
     }
     
-    mutating func addCard(){
+    mutating func addCard() {
         if let card = deck.getCard() {
             cardsInGame.append(card)
         }

@@ -225,6 +225,6 @@ class SetCardView: UIView {
         static let cornerRadius: CGFloat =  0.07
         static let stripeInnerSpace: CGFloat = 0.1
         static let stripeWidth: CGFloat = 0.05
-        static let borderWidth: CGFloat = 0.06
+        static let borderWidth: CGFloat = 0.04
     }
 }
