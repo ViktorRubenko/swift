@@ -175,7 +175,8 @@ class ViewController: UIViewController {
         cardsDeckLabel.text = "Deck: \(setGame.deck.cards.count)"
         if setGame.deck.cards.count == 0 && setGame.setCount == 0 {
             let alert = UIAlertController(title: "Congrants!", message: "No more sets left in the deck", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "New Game", style: .default, handler: { _ in self.newGame(reminder: true) }))
+            alert.addAction(UIAlertAction(title: "New Game", style: .default, handler: { _ in self.newGame(reminder: true)
+            }))
             
             self.present(alert, animated: true)
         }
