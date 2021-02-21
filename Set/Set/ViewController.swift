@@ -41,7 +41,12 @@ class ViewController: UIViewController {
                     }
                 )
             } else {
-                scoreLabel.text = "Score: 0"
+                switch traitCollection.horizontalSizeClass {
+                case .compact:
+                    scoreLabel.text = "Score:\n0"
+                default:
+                    scoreLabel.text = "Score: 0"
+                }
             }
         }
     }
@@ -71,6 +76,7 @@ class ViewController: UIViewController {
     }
     
     private func configure() {
+        score = 0
         configureLayer(view: scoreLabel)
         configureLayer(view: newGameButton)
         configureLayer(view: dealThreeButton)
