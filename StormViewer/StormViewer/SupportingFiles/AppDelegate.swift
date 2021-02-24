@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  ImageViewer
+//  StormViewer
 //
-//  Created by Victor Rubenko on 04.01.2021.
+//  Created by Victor Rubenko on 24.02.2021.
 //
 
 import UIKit

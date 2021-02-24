@@ -9,10 +9,11 @@ import UIKit
 
 class ImageViewController: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet weak var loadIndicator: UIActivityIndicatorView!
     @IBOutlet weak var scrollVIew: UIScrollView! {
         didSet {
             scrollVIew.delegate = self
-            scrollVIew.minimumZoomScale = 0.5
+            scrollVIew.minimumZoomScale = 0.1
             scrollVIew.maximumZoomScale = 2.0
             scrollVIew.addSubview(imageView)
         }
@@ -39,6 +40,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
         
         set {
+            loadIndicator?.stopAnimating()
             imageView.image = newValue
             imageView.sizeToFit()
             scrollVIew?.contentSize = imageView.frame.size
@@ -59,11 +61,13 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     private func fetchImage() {
         if let url = imageURL {
             print("get url")
+            loadIndicator?.startAnimating()
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 print("try to load")
                 let urlContents = try? Data(contentsOf: url)
                 DispatchQueue.main.async {
-                    if let dateContents = urlContents {
+                    // Check imageURL if it's still that url, else dont set 
+                    if let dateContents = urlContents, url == self?.imageURL {
                         self?.image = UIImage(data: dateContents)
                     }
                 }
