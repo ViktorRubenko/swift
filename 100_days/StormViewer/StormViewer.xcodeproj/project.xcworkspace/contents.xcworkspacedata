@@ -4,6 +4,9 @@
    <Group
       location = "group:"
       name = "Images">
+      <FileRef
+         location = "group:/Users/victor/swift/StormViewer/StormViewer/TableViewController.swift">
+      </FileRef>
    </Group>
    <FileRef
       location = "self:">
