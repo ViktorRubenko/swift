@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     
+    private var attemps = 0
     private var score = 0 {
         didSet {
             UIView.transition(
@@ -55,6 +56,27 @@ class ViewController: UIViewController {
         } else {
             score -= 1
         }
+        attemps += 1
+        if attemps == 10 {
+            let alert = UIAlertController(title: "The game is ended", message: "Your score is \(score)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "New Game", style: .default, handler: { _ in
+                self.newGame()
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { _ in
+                let vc = UIActivityViewController(activityItems: ["My score in FlagGuesser is \(self.score)"], applicationActivities: [])
+                self.present(vc, animated: true, completion: nil)
+                self.newGame()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        askQuestion()
+    }
+    
+    func newGame() {
+        score = 0
+        scoreLabel.textColor = .black
+        attemps = 0
         askQuestion()
     }
     
@@ -75,6 +97,7 @@ class ViewController: UIViewController {
                 print(correntCountry)
                 self!.countryLabel.text = correntCountry
             },
-            completion: nil)
+            completion: nil
+        )
     }
 }
