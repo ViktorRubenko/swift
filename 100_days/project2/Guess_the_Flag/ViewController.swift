@@ -59,14 +59,12 @@ class ViewController: UIViewController {
         attemps += 1
         if attemps == 10 {
             let alert = UIAlertController(title: "The game is ended", message: "Your score is \(score)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "New Game", style: .default, handler: { _ in
-                self.newGame()
-                
-            }))
+            alert.addAction(UIAlertAction(title: "New Game", style: .default, handler: { action in self.newGame()} ))
             alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { _ in
                 let vc = UIActivityViewController(activityItems: ["My score in FlagGuesser is \(self.score)"], applicationActivities: [])
                 self.present(vc, animated: true, completion: nil)
-                self.newGame()
+                vc.completionWithItemsHandler = { (activity, sucess, items, error) in
+                    self.newGame() }
             }))
             self.present(alert, animated: true, completion: nil)
         }
@@ -77,7 +75,6 @@ class ViewController: UIViewController {
         score = 0
         scoreLabel.textColor = .black
         attemps = 0
-        askQuestion()
     }
     
     func askQuestion() {
