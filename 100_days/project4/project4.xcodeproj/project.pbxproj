@@ -56,15 +56,23 @@
 		573E0CBE25EAE92300296669 /* project4 */ = {
 			isa = PBXGroup;
 			children = (
-				573E0CBF25EAE92300296669 /* AppDelegate.swift */,
-				573E0CC125EAE92300296669 /* SceneDelegate.swift */,
+				573E0CD425EAE94600296669 /* SupportingFiles */,
 				573E0CC325EAE92300296669 /* ViewController.swift */,
 				573E0CC525EAE92300296669 /* Main.storyboard */,
 				573E0CC825EAE92700296669 /* Assets.xcassets */,
-				573E0CCA25EAE92700296669 /* LaunchScreen.storyboard */,
 				573E0CCD25EAE92700296669 /* Info.plist */,
 			);
 			path = project4;
+			sourceTree = "<group>";
+		};
+		573E0CD425EAE94600296669 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				573E0CBF25EAE92300296669 /* AppDelegate.swift */,
+				573E0CC125EAE92300296669 /* SceneDelegate.swift */,
+				573E0CCA25EAE92700296669 /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
