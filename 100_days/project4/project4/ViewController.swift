@@ -16,11 +16,20 @@ class ViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reload))
+        
+        toolbarItems = [spacer, refresh]
+        navigationController?.isToolbarHidden = false
         
         let url = URL(string: "https://pals-geo.ru")
         webView.load(URLRequest(url: url!))
         webView.allowsBackForwardNavigationGestures = true
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func reload() {
+        webView.reload()
     }
     
     @objc func openTapped() {
