@@ -11,6 +11,7 @@ import WebKit
 class ViewController: UIViewController, WKNavigationDelegate {
     
     var webView: WKWebView!
+    var progressView: UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,13 +20,25 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reload))
         
-        toolbarItems = [spacer, refresh]
+        progressView = UIProgressView(progressViewStyle: .bar)
+        progressView.sizeToFit()
+        let progressButton = UIBarButtonItem(customView: progressView)
+        
+        toolbarItems = [progressButton, spacer, refresh]
         navigationController?.isToolbarHidden = false
+        
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         
         let url = URL(string: "https://pals-geo.ru")
         webView.load(URLRequest(url: url!))
         webView.allowsBackForwardNavigationGestures = true
         // Do any additional setup after loading the view.
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "estimatedProgress" {
+            progressView.progress = Float(webView.estimatedProgress)
+        }
     }
     
     @objc func reload() {
