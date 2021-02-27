@@ -8,11 +8,12 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class DetailViewController: UIViewController, WKNavigationDelegate {
     
+    var startURL: String?
     var webView: WKWebView!
     var progressView: UIProgressView!
-    var websites = ["apple.com", "google.com", "ya.com"]
+    var websites = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         
-        let url = URL(string: "https://apple.com")
+        let url = URL(string: startURL!)
+        print(url)
         webView.load(URLRequest(url: url!))
         webView.allowsBackForwardNavigationGestures = true
         // Do any additional setup after loading the view.
