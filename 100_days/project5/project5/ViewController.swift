@@ -29,6 +29,7 @@ class ViewController: UITableViewController {
         startGame()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptAnswer))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(startGame))
     }
     
     @objc func promptAnswer() {
@@ -47,8 +48,8 @@ class ViewController: UITableViewController {
     }
     
     func submit(_ answer: String) {
-        if isPossible(word: answer) && isOriginal(word: answer) && isReal(word: answer) {
-            usedWords.insert(answer, at: 0)
+        if isPossible(word: answer) && isOriginal(word: answer) && isReal(word: answer) && simpleCheck(word: answer) {
+            usedWords.insert(answer.lowercased(), at: 0)
             let indexPath = IndexPath(row: 0, section: 0)
             tableView.insertRows(at: [indexPath], with: .fade)
         } else {
@@ -58,10 +59,14 @@ class ViewController: UITableViewController {
         }
     }
     
+    func simpleCheck(word: String) -> Bool {
+        return !(word.count < 3 || word.lowercased() == title?.lowercased())
+    }
+    
     func isPossible(word: String) -> Bool {
         guard var tempWord = title?.lowercased() else { return false }
         
-        for letter in word {
+        for letter in word.lowercased() {
             if let position = tempWord.firstIndex(of: letter) {
                 tempWord.remove(at: position)
             } else {
@@ -72,7 +77,7 @@ class ViewController: UITableViewController {
     }
     
     func isOriginal(word: String) -> Bool {
-        return !usedWords.contains(word)
+        return !usedWords.contains(word.lowercased())
     }
     
     func isReal(word: String) -> Bool {
@@ -82,7 +87,7 @@ class ViewController: UITableViewController {
         return misspelledRange.location == NSNotFound
     }
     
-    func startGame() {
+    @objc func startGame() {
         title = allWords.randomElement()
         usedWords.removeAll()
         tableView.reloadData()
