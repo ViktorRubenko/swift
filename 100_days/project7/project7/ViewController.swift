@@ -87,6 +87,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "petitionCell", for: indexPath)
         cell.textLabel?.text = "\(indexPath.row + 1) \(filtredPetitions[indexPath.row].title)"
+        cell.detailTextLabel?.text = filtredPetitions[indexPath.row].body
         return cell
     }
     
