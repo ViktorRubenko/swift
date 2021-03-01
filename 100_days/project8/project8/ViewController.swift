@@ -20,16 +20,19 @@ class ViewController: UIViewController {
     
     var activatedButtons = [UIButton]()
     var solutions = [String]()
+    var answered = 0
     
     var gameLevel: Level? = nil
     
-    var score = 0 {
+    var score: Double = 0 {
         didSet {
             scoreLabel.text = "Score: \(score)"
         }
     }
     var level = 1 {
         didSet {
+            score = 0
+            answered = 0
             solutions.removeAll()
             loadLevel()
         }
@@ -152,6 +155,8 @@ class ViewController: UIViewController {
                 
                 let frame = CGRect(x: col * width, y: row * height, width: width, height: height)
                 letterButton.frame = frame
+                letterButton.layer.borderWidth = 1
+                letterButton.layer.borderColor = UIColor.gray.cgColor
                 
                 buttonsView.addSubview(letterButton)
                 
@@ -174,13 +179,20 @@ class ViewController: UIViewController {
             activatedButtons.removeAll()
             currentAnswer.text = ""
             score += 1
+            answered += 1
             
-            if score % 7 == 0 {
+            if answered % 7 == 0 {
                 let ac = UIAlertController(title: "Well Done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp ))
                 present(ac, animated: true, completion: nil)
                 level += 1
             }
+        } else {
+            let ac = UIAlertController(title: "Wrong answer", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(ac, animated: true, completion: nil)
+            
+            score -= 0.2
         }
     }
     
