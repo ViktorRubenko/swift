@@ -56,6 +56,16 @@ class ViewController: UIViewController {
         currentAnswer.isUserInteractionEnabled = false
         view.addSubview(currentAnswer)
         
+        submitButton = UIButton(type: .system)
+        submitButton.translatesAutoresizingMaskIntoConstraints = false
+        submitButton.setTitle("SUBMIT", for: .normal)
+        view.addSubview(submitButton)
+        
+        clearButton = UIButton(type: .system)
+        clearButton.translatesAutoresizingMaskIntoConstraints = false
+        clearButton.setTitle("CLEAR", for: .normal)
+        view.addSubview(clearButton)
+        
         NSLayoutConstraint.activate([
             scoreLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             scoreLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
@@ -69,6 +79,12 @@ class ViewController: UIViewController {
             currentAnswer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             currentAnswer.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 0.8),
             currentAnswer.topAnchor.constraint(equalTo: cluesLabel.bottomAnchor, constant: 50),
+            submitButton.topAnchor.constraint(equalTo: currentAnswer.bottomAnchor, constant: 10),
+            submitButton.leadingAnchor.constraint(equalTo: currentAnswer.leadingAnchor, constant: 10),
+            submitButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2),
+            clearButton.topAnchor.constraint(equalTo: submitButton.topAnchor),
+            clearButton.widthAnchor.constraint(equalTo: submitButton.widthAnchor),
+            clearButton.trailingAnchor.constraint(equalTo: currentAnswer.trailingAnchor, constant: -10),
         ])
         answersLabel.backgroundColor = .red
         cluesLabel.backgroundColor = .green
