@@ -17,31 +17,47 @@ class ViewController: UIViewController {
     var answersLabel: UILabel!
     var scoreLabel: UILabel!
     var buttonsView: UIView!
+    
+    var activatedButtons = [UIButton]()
+    var solutions = [String]()
+    
+    var gameLevel: Level? = nil
+    
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
+    var level = 1 {
+        didSet {
+            solutions.removeAll()
+            loadLevel()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        let width = Int(buttonsView.bounds.width / 4)
-        let height = 45
+    func loadLevel() {
+        gameLevel = Level(level: level)
+        solutions = gameLevel!.solutions
         
-        for row in 0...4 {
-            for col in 0...3 {
-                let letterButton = UIButton(type: .system)
-                letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-                letterButton.setTitle("WWW", for: .normal)
-                
-                let frame = CGRect(x: col * width, y: row * height, width: width, height: height)
-                letterButton.frame = frame
-                
-                buttonsView.addSubview(letterButton)
-                
-                lettersButtons.append(letterButton)
+        cluesLabel.text = gameLevel!.clueString.trimmingCharacters(in: .whitespacesAndNewlines)
+        answersLabel.text = gameLevel!.solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if gameLevel!.lettersBits.count == lettersButtons.count {
+            for (index, letterButton) in lettersButtons.enumerated() {
+                letterButton.setTitle(gameLevel!.lettersBits[index], for: .normal)
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        loadLevel()
     }
     
     override func loadView() {
@@ -96,7 +112,7 @@ class ViewController: UIViewController {
             scoreLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             cluesLabel.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor),
             cluesLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 20),
-            cluesLabel.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 0.2),
+            cluesLabel.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 0.5),
             answersLabel.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor),
             answersLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20),
             answersLabel.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 0.3),
@@ -121,6 +137,73 @@ class ViewController: UIViewController {
         answersLabel.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
         // 1 - >stretch verticaly
         
+        submitButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
+        clearButton.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
+        
+        let width = 85
+        let height = 45
+        
+        for row in 0...4 {
+            for col in 0...3 {
+                let letterButton = UIButton(type: .system)
+                letterButton.addTarget(self, action: #selector(lettersTApped), for: .touchUpInside)
+                letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+                letterButton.setTitle("WWW", for: .normal)
+                
+                let frame = CGRect(x: col * width, y: row * height, width: width, height: height)
+                letterButton.frame = frame
+                
+                buttonsView.addSubview(letterButton)
+                
+                lettersButtons.append(letterButton)
+            }
+        }
+
+        
+    }
+    
+    @objc func submitTapped(_ sender: UIButton) {
+        guard let answeredText = currentAnswer.text else { return }
+        
+        if let solutionPosition = solutions.firstIndex(of: answeredText) {
+            
+            var splitAnswers = answersLabel.text?.components(separatedBy: "\n")
+            splitAnswers?[solutionPosition] = answeredText
+            answersLabel.text = splitAnswers?.joined(separator: "\n")
+            
+            activatedButtons.removeAll()
+            currentAnswer.text = ""
+            score += 1
+            
+            if score % 7 == 0 {
+                let ac = UIAlertController(title: "Well Done!", message: "Are you ready for the next level?", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp ))
+                present(ac, animated: true, completion: nil)
+                level += 1
+            }
+        }
+    }
+    
+    func levelUp(action: UIAlertAction) {
+        level += 1
+        for button in lettersButtons {
+            button.isHidden = false
+        }
+    }
+    
+    @objc func clearTapped(_ sender: UIButton) {
+        currentAnswer.text = ""
+        for button in activatedButtons {
+            button.isHidden = false
+        }
+        activatedButtons.removeAll()
+    }
+    
+    @objc func lettersTApped(_ sender: UIButton) {
+        guard let buttonTitle = sender.titleLabel?.text else { return }
+        currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
+        activatedButtons.append(sender)
+        sender.isHidden = true
     }
 
 }
