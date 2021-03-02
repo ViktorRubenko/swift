@@ -54,6 +54,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc.addAction(UIAlertAction(title: "submit", style: .default) {
             [weak self, weak vc] _ in
             guard let filterString = vc?.textFields?[0].text else { return }
+            self?.filterAction(filterString)
+        }
+        )
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func filterAction(_ filterString: String) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            [weak self] in
             let terms = filterString.components(separatedBy: " ").map { $0.lowercased() }
             self?.filtredPetitions = [Petition]()
             for petition in self!.petitions {
@@ -64,10 +73,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     }
                 }
             }
-            self?.tableView.reloadData()
+            DispatchQueue.main.async {
+                [weak self] in
+                self?.tableView.reloadData()
+            }
         }
-        )
-        present(vc, animated: true, completion: nil)
     }
     
     func parse(json: Data) {
