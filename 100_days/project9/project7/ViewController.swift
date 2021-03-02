@@ -30,7 +30,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
         }
         
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             if let url = URL(string: urlString) {
                 if let data = try? Data(contentsOf: url) {
                     self?.parse(json: data)
@@ -64,7 +64,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     }
                 }
             }
-            self?.tableView.reloadData()
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
         }
         )
         present(vc, animated: true, completion: nil)
@@ -99,9 +101,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func showError() {
-        let vc = UIAlertController(title: "Loading Error", message: nil, preferredStyle: .alert)
-        vc.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(vc, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let vc = UIAlertController(title: "Loading Error", message: nil, preferredStyle: .alert)
+            vc.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(vc, animated: true, completion: nil)
+        }
     }
 
 }
