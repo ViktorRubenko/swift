@@ -44,15 +44,19 @@ class ViewController: UIViewController {
     }
     
     func loadLevel() {
-        gameLevel = Level(level: level)
-        solutions = gameLevel!.solutions
-        
-        cluesLabel.text = gameLevel!.clueString.trimmingCharacters(in: .whitespacesAndNewlines)
-        answersLabel.text = gameLevel!.solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        if gameLevel!.lettersBits.count == lettersButtons.count {
-            for (index, letterButton) in lettersButtons.enumerated() {
-                letterButton.setTitle(gameLevel!.lettersBits[index], for: .normal)
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self!.gameLevel = Level(level: self!.level)
+            DispatchQueue.main.async {
+                self!.solutions = self!.gameLevel!.solutions
+                
+                self!.cluesLabel.text = self!.gameLevel!.clueString.trimmingCharacters(in: .whitespacesAndNewlines)
+                self!.answersLabel.text = self!.gameLevel!.solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if self!.gameLevel!.lettersBits.count == self!.lettersButtons.count {
+                    for (index, letterButton) in self!.lettersButtons.enumerated() {
+                        letterButton.setTitle(self!.gameLevel!.lettersBits[index], for: .normal)
+                    }
+                }
             }
         }
     }
