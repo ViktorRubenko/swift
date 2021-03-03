@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2fU-pS-3dD">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Collection View Controller-->
+        <scene sceneID="eDj-NC-ouu">
+            <objects>
+                <collectionViewController id="2fU-pS-3dD" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="8Re-ND-juj" customClass="I">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VmY-97-LHE">
+                            <size key="itemSize" width="140" height="180"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="Person" id="9Uu-rH-ZSk" customClass="PersonCell" customModule="project10" customModuleProvider="target">
+                                <rect key="frame" x="10" y="10" width="54.5" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Tq8-dE-m3Z">
+                                    <rect key="frame" x="0.0" y="0.0" width="54.5" height="125"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q81-s2-5wL">
+                                            <rect key="frame" x="10" y="10" width="34.5" height="82.5"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXf-Mk-QZA">
+                                            <rect key="frame" x="10" y="97.5" width="34.5" height="17.5"/>
+                                            <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="aXf-Mk-QZA" secondAttribute="bottom" constant="10" id="147-rp-fZA"/>
+                                        <constraint firstItem="q81-s2-5wL" firstAttribute="leading" secondItem="Tq8-dE-m3Z" secondAttribute="leading" constant="10" id="Ali-KJ-J5k"/>
+                                        <constraint firstItem="aXf-Mk-QZA" firstAttribute="top" secondItem="q81-s2-5wL" secondAttribute="bottom" constant="5" id="J99-kT-Omk"/>
+                                        <constraint firstAttribute="trailing" secondItem="q81-s2-5wL" secondAttribute="trailing" constant="10" id="VBg-QE-5WY"/>
+                                        <constraint firstItem="q81-s2-5wL" firstAttribute="height" secondItem="Tq8-dE-m3Z" secondAttribute="height" multiplier="0.66" id="c7G-Az-FMa"/>
+                                        <constraint firstItem="q81-s2-5wL" firstAttribute="top" secondItem="Tq8-dE-m3Z" secondAttribute="top" constant="10" id="cZt-oD-m3n"/>
+                                        <constraint firstItem="aXf-Mk-QZA" firstAttribute="leading" secondItem="Tq8-dE-m3Z" secondAttribute="leading" constant="10" id="hWf-pl-VhK"/>
+                                        <constraint firstAttribute="trailing" secondItem="aXf-Mk-QZA" secondAttribute="trailing" constant="10" id="q3p-0B-Vhb"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="imageView" destination="q81-s2-5wL" id="bMc-F2-Svn"/>
+                                    <outlet property="name" destination="aXf-Mk-QZA" id="n9w-2f-9de"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="2fU-pS-3dD" id="4mo-XL-SnM"/>
+                            <outlet property="delegate" destination="2fU-pS-3dD" id="70Q-lX-xfH"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MDU-pv-T8p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-402" y="-93"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
