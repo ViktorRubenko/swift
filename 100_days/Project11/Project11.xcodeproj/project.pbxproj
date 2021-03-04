@@ -13,6 +13,7 @@
 		57351EBF25F15E2A00627060 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57351EBE25F15E2A00627060 /* GameViewController.swift */; };
 		57351EC225F15E2A00627060 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57351EC025F15E2A00627060 /* Main.storyboard */; };
 		57351EC425F15E2E00627060 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57351EC325F15E2E00627060 /* Assets.xcassets */; };
+		57351ED625F183DB00627060 /* FireParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57351ED525F183DB00627060 /* FireParticles.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		57351EC125F15E2A00627060 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		57351EC325F15E2E00627060 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57351EC525F15E2E00627060 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57351ED525F183DB00627060 /* FireParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticles.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				57351EBE25F15E2A00627060 /* GameViewController.swift */,
 				57351EC025F15E2A00627060 /* Main.storyboard */,
 				57351EC325F15E2E00627060 /* Assets.xcassets */,
+				57351ED525F183DB00627060 /* FireParticles.sks */,
 				57351EC525F15E2E00627060 /* Info.plist */,
 			);
 			path = Project11;
@@ -125,6 +128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57351EC225F15E2A00627060 /* Main.storyboard in Resources */,
+				57351ED625F183DB00627060 /* FireParticles.sks in Resources */,
 				57351EB925F15E2A00627060 /* GameScene.sks in Resources */,
 				57351EC425F15E2E00627060 /* Assets.xcassets in Resources */,
 			);
