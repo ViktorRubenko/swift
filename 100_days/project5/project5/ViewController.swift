@@ -11,6 +11,8 @@ class ViewController: UITableViewController {
     
     var allWords = [String]()
     var usedWords = [String]()
+    
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,12 @@ class ViewController: UITableViewController {
             allWords = ["silworm"]
         }
         
-        startGame()
+        if let mainWord = defaults.value(forKey: "mainWord") as? String, let usedWordsValue = defaults.value(forKey: "usedWords") as? [String] {
+            usedWords = usedWordsValue
+            title = mainWord
+        } else {
+            startGame()
+        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptAnswer))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(startGame))
@@ -52,6 +59,7 @@ class ViewController: UITableViewController {
             usedWords.insert(answer.lowercased(), at: 0)
             let indexPath = IndexPath(row: 0, section: 0)
             tableView.insertRows(at: [indexPath], with: .fade)
+            save()
         } else {
             let ac = UIAlertController(title: "Invalid word", message: nil, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -91,6 +99,7 @@ class ViewController: UITableViewController {
         title = allWords.randomElement()
         usedWords.removeAll()
         tableView.reloadData()
+        save()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -101,6 +110,11 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "wordCell", for: indexPath)
         cell.textLabel?.text = usedWords[indexPath.row]
         return cell
+    }
+    
+    func save() {
+        defaults.setValue(title, forKey: "mainWord")
+        defaults.setValue(usedWords, forKey: "usedWords")
     }
 
 }
