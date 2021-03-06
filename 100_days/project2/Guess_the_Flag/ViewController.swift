@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet var flagsButtons: [UIButton]!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var topScoreLabel: UILabel!
     
     private var attemps = 0
     private var score = 0 {
@@ -33,10 +34,20 @@ class ViewController: UIViewController {
         }
     }
     private var correntAnswer = 0
+    private var topScore = 0 {
+        didSet {
+            topScoreLabel.text = "Top Score: \(topScore)"
+        }
+    }
+    
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        if let topScoreValue = defaults.value(forKey: "topScoreValue") as? Int {
+            topScore = topScoreValue
+        }
         configure()
         askQuestion()
     }
@@ -58,7 +69,15 @@ class ViewController: UIViewController {
         }
         attemps += 1
         if attemps == 10 {
-            let alert = UIAlertController(title: "The game is ended", message: "Your score is \(score)", preferredStyle: .alert)
+            var message = ""
+            if score > topScore {
+                topScore = score
+                message = "Congratulations!\nYou set new TopScore to \(score)!"
+                defaults.setValue(topScore, forKey: "topScoreValue")
+            } else {
+                message = "Your score is \(score)"
+            }
+            let alert = UIAlertController(title: "The game is ended", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "New Game", style: .default, handler: { action in self.newGame()} ))
             alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { _ in
                 let vc = UIActivityViewController(activityItems: ["My score in FlagGuesser is \(self.score)"], applicationActivities: [])

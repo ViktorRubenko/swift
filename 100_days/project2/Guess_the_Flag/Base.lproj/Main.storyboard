@@ -45,14 +45,20 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zCP-do-CZp" userLabel="Stack Label">
                                 <rect key="frame" x="0.0" y="44" width="390" height="70"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8q-nr-FUg">
-                                        <rect key="frame" x="164.66666666666666" y="0.0" width="61" height="41.666666666666664"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Top Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Glt-6f-5fD">
+                                        <rect key="frame" x="147" y="0.0" width="96" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ded-g5-gQd">
-                                        <rect key="frame" x="163.33333333333334" y="49.666666666666671" width="63.666666666666657" height="20.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ded-g5-gQd">
+                                        <rect key="frame" x="163.33333333333334" y="28.333333333333329" width="63.666666666666657" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8q-nr-FUg">
+                                        <rect key="frame" x="164.66666666666666" y="56.666666666666671" width="61" height="13.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -89,6 +95,7 @@
                     <connections>
                         <outlet property="countryLabel" destination="E8q-nr-FUg" id="exA-an-SXv"/>
                         <outlet property="scoreLabel" destination="Ded-g5-gQd" id="6Br-5z-R1m"/>
+                        <outlet property="topScoreLabel" destination="Glt-6f-5fD" id="UCh-pO-uh6"/>
                         <outletCollection property="flagsButtons" destination="NGR-Uf-hL7" collectionClass="NSMutableArray" id="Fsp-ub-gNd"/>
                         <outletCollection property="flagsButtons" destination="Ma9-5M-vkv" collectionClass="NSMutableArray" id="2Lg-EN-Ze6"/>
                         <outletCollection property="flagsButtons" destination="4xu-V3-wsd" collectionClass="NSMutableArray" id="dSi-2M-m2V"/>
