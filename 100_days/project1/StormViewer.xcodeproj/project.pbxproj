@@ -17,7 +17,7 @@
 		57DE86C025E6EB140000B5B4 /* 1J7amCKyAok.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 57DE86BB25E6EB140000B5B4 /* 1J7amCKyAok.jpg */; };
 		57DE86C125E6EB140000B5B4 /* 52397852_401.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 57DE86BA25E6EB140000B5B4 /* 52397852_401.jpg */; };
 		57DE86CC25E6F37D0000B5B4 /* DetailVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DE86CB25E6F37D0000B5B4 /* DetailVIewController.swift */; };
-		57DE86E425E6FE940000B5B4 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DE86E025E6FE8D0000B5B4 /* TableViewController.swift */; };
+		57DFFB6D25F4216D00FA984E /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DE86E025E6FE8D0000B5B4 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,12 +28,12 @@
 		57DE869625E6E7FE0000B5B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57DE869925E6E7FE0000B5B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57DE869B25E6E7FE0000B5B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		57DE86A425E6E9F50000B5B4 /* ImagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImagesManager.swift; path = /Users/victor/swift/StormViewer/StormViewer/SupportingFiles/ImagesManager.swift; sourceTree = "<absolute>"; };
+		57DE86A425E6E9F50000B5B4 /* ImagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImagesManager.swift; path = /Users/victor/swift/100_days/project1/StormViewer/SupportingFiles/ImagesManager.swift; sourceTree = "<absolute>"; };
 		57DE86B725E6EB140000B5B4 /* 1_LMIpQmh1Sshrc8Kc2RP3pA.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1_LMIpQmh1Sshrc8Kc2RP3pA.jpg; sourceTree = "<group>"; };
 		57DE86BA25E6EB140000B5B4 /* 52397852_401.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 52397852_401.jpg; sourceTree = "<group>"; };
 		57DE86BB25E6EB140000B5B4 /* 1J7amCKyAok.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1J7amCKyAok.jpg; sourceTree = "<group>"; };
-		57DE86CB25E6F37D0000B5B4 /* DetailVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailVIewController.swift; path = /Users/victor/swift/StormViewer/StormViewer/DetailVIewController.swift; sourceTree = "<absolute>"; };
-		57DE86E025E6FE8D0000B5B4 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = /Users/victor/swift/StormViewer/StormViewer/TableViewController.swift; sourceTree = "<absolute>"; };
+		57DE86CB25E6F37D0000B5B4 /* DetailVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailVIewController.swift; path = /Users/victor/swift/100_days/project1/StormViewer/DetailVIewController.swift; sourceTree = "<absolute>"; };
+		57DE86E025E6FE8D0000B5B4 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = /Users/victor/swift/100_days/project1/StormViewer/TableViewController.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +174,7 @@
 				57DE86CC25E6F37D0000B5B4 /* DetailVIewController.swift in Sources */,
 				57DE868E25E6E7FC0000B5B4 /* AppDelegate.swift in Sources */,
 				57DE869025E6E7FC0000B5B4 /* SceneDelegate.swift in Sources */,
-				57DE86E425E6FE940000B5B4 /* TableViewController.swift in Sources */,
+				57DFFB6D25F4216D00FA984E /* TableViewController.swift in Sources */,
 				57DE86A525E6E9F50000B5B4 /* ImagesManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
