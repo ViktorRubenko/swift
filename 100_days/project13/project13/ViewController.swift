@@ -11,7 +11,9 @@ import CoreImage
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var intensity: UISlider!
+    @IBOutlet weak var radius: UISlider!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var filterButton: UIButton!
     
     var currentImage: UIImage! {
         didSet {
@@ -68,6 +70,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         guard let actionTitle = action.title else { return }
         currentFilter = CIFilter(name: actionTitle)
+        filterButton.setTitle(actionTitle, for: .normal)
         
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
@@ -76,12 +79,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func save(_ sender: Any) {
+        guard imageView.image != nil else {
+            let ac = UIAlertController(title: "There is not photo to save", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(ac, animated: true, completion: nil)
+            return
+        }
         UIImageWriteToSavedPhotosAlbum(imageView.image!, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     @IBAction func intensityChanged(_ sender: Any) {
         applyProcessing()
     }
     
+    @IBAction func radiusChanged(_ sender: Any) {
+        applyProcessing()
+    }
     func applyProcessing() {
         guard let image = currentFilter.outputImage else { return }
         let inputKeys = currentFilter.inputKeys
@@ -90,7 +102,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }
                 
         if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(intensity.value * 200, forKey: kCIInputRadiusKey)
+            currentFilter.setValue(radius.value * 200, forKey: kCIInputRadiusKey)
         }
 
         if inputKeys.contains(kCIInputScaleKey) {
@@ -108,7 +120,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
+        if error != nil {
             let ac = UIAlertController(title: "Save error", message: nil, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(ac, animated: true, completion: nil)
