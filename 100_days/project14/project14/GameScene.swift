@@ -16,6 +16,7 @@ class GameScene: SKScene {
         }
     }
     var slots = [WhackSlot]()
+    var popupTime = 0.85
     
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "whackBackground")
@@ -34,8 +35,34 @@ class GameScene: SKScene {
         addChild(gameScore)
         
         setSlots()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            [weak self] in
+            self?.createEnemy()
+        })
     }
 
+    func createEnemy() {
+        popupTime *= 0.991
+        
+        slots.shuffle()
+        slots[0].show(hideTime: popupTime)
+        
+        if Int.random(in: 0...12) > 4 { slots[1].show(hideTime: popupTime) }
+        if Int.random(in: 0...12) > 8 { slots[2].show(hideTime: popupTime) }
+        if Int.random(in: 0...12) > 10 { slots[3].show(hideTime: popupTime) }
+        if Int.random(in: 0...12) > 11 { slots[4].show(hideTime: popupTime) }
+        
+        let minDelay = popupTime / 2.0
+        let maxDelay = popupTime * 2
+        let delay = Double.random(in: minDelay...maxDelay)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
+            [weak self] in
+            self?.createEnemy()
+        })
+        
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
