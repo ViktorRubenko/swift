@@ -13,6 +13,7 @@
 		57A565DB25F80DA7003A2992 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A565DA25F80DA7003A2992 /* GameViewController.swift */; };
 		57A565DE25F80DA7003A2992 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57A565DC25F80DA7003A2992 /* Main.storyboard */; };
 		57A565E025F80DAD003A2992 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57A565DF25F80DAD003A2992 /* Assets.xcassets */; };
+		57A565EC25F8147B003A2992 /* WhackSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A565EB25F8147B003A2992 /* WhackSlot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		57A565DD25F80DA7003A2992 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		57A565DF25F80DAD003A2992 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57A565E125F80DAD003A2992 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57A565EB25F8147B003A2992 /* WhackSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhackSlot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				57A565D225F80DA7003A2992 /* AppDelegate.swift */,
 				57A565D425F80DA7003A2992 /* GameScene.sks */,
 				57A565D825F80DA7003A2992 /* GameScene.swift */,
+				57A565EB25F8147B003A2992 /* WhackSlot.swift */,
 				57A565DA25F80DA7003A2992 /* GameViewController.swift */,
 				57A565DC25F80DA7003A2992 /* Main.storyboard */,
 				57A565DF25F80DAD003A2992 /* Assets.xcassets */,
@@ -139,6 +142,7 @@
 			files = (
 				57A565D925F80DA7003A2992 /* GameScene.swift in Sources */,
 				57A565DB25F80DA7003A2992 /* GameViewController.swift in Sources */,
+				57A565EC25F8147B003A2992 /* WhackSlot.swift in Sources */,
 				57A565D325F80DA7003A2992 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,7 +292,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ViktorRubenko.project14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -307,7 +311,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ViktorRubenko.project14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
