@@ -17,8 +17,10 @@ class GameScene: SKScene {
     }
     var slots = [WhackSlot]()
     var popupTime = 0.85
+    var numRounds = 0
     
     override func didMove(to view: SKView) {
+        
         let background = SKSpriteNode(imageNamed: "whackBackground")
         background.scale(to: CGSize(width: 2532, height: 1170))
         background.position = CGPoint(x: 1266, y: 585)
@@ -26,7 +28,7 @@ class GameScene: SKScene {
         background.blendMode = .replace
         addChild(background)
         
-        let gameScore = SKLabelNode(fontNamed: "Chalkduster")
+        gameScore = SKLabelNode(fontNamed: "Chalkduster")
         gameScore.position = CGPoint(x: 70, y: 50)
         gameScore.text = "Score: 0"
         gameScore.horizontalAlignmentMode = .left
@@ -43,7 +45,20 @@ class GameScene: SKScene {
     }
 
     func createEnemy() {
-        popupTime *= 0.991
+        popupTime *= 0.95
+
+        if numRounds >= 30 {
+            for slot in slots {
+                slot.hide()
+            }
+            
+            let gameOver = SKSpriteNode(imageNamed: "GaveOver")
+            gameOver.position = CGPoint(x: 1266, y: 585)
+            gameOver.zPosition = 1
+            addChild(gameOver)
+            gameOver.run(SKAction.playSoundFileNamed("gameover.caf", waitForCompletion: false))
+            return
+        }
         
         slots.shuffle()
         slots[0].show(hideTime: popupTime)
@@ -62,8 +77,29 @@ class GameScene: SKScene {
             self?.createEnemy()
         })
         
+        numRounds += 1
+        
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        let tappedNodes = nodes(at: location)
+        for node in tappedNodes {
+            guard let whackSlot = node.parent?.parent as? WhackSlot else { return }
+            if !whackSlot.isVisible { return }
+            if whackSlot.isHit { continue }
+            if node.name == "charFriend" {
+                whackSlot.hit()
+                score -= 5
+                
+                run(SKAction.playSoundFileNamed("whackBad.caf", waitForCompletion: false))
+            } else if node.name == "charEnemy" {
+                whackSlot.hit()
+                score += 5
+                
+                run(SKAction.playSoundFileNamed("whack.caf", waitForCompletion: false))
+            }
+        }
     }
     
     func setSlots() {

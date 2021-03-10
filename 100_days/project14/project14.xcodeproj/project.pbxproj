@@ -14,6 +14,9 @@
 		57A565DE25F80DA7003A2992 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57A565DC25F80DA7003A2992 /* Main.storyboard */; };
 		57A565E025F80DAD003A2992 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57A565DF25F80DAD003A2992 /* Assets.xcassets */; };
 		57A565EC25F8147B003A2992 /* WhackSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A565EB25F8147B003A2992 /* WhackSlot.swift */; };
+		57E78ACC25F9585100901E2F /* whackBad.caf in Resources */ = {isa = PBXBuildFile; fileRef = 57E78ACA25F9585100901E2F /* whackBad.caf */; };
+		57E78ACD25F9585100901E2F /* whack.caf in Resources */ = {isa = PBXBuildFile; fileRef = 57E78ACB25F9585100901E2F /* whack.caf */; };
+		57E78AD225F95ACB00901E2F /* gameover.caf in Resources */ = {isa = PBXBuildFile; fileRef = 57E78AD125F95ACB00901E2F /* gameover.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		57A565DF25F80DAD003A2992 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57A565E125F80DAD003A2992 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57A565EB25F8147B003A2992 /* WhackSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhackSlot.swift; sourceTree = "<group>"; };
+		57E78ACA25F9585100901E2F /* whackBad.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whackBad.caf; sourceTree = "<group>"; };
+		57E78ACB25F9585100901E2F /* whack.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whack.caf; sourceTree = "<group>"; };
+		57E78AD125F95ACB00901E2F /* gameover.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameover.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +72,19 @@
 				57A565DC25F80DA7003A2992 /* Main.storyboard */,
 				57A565DF25F80DAD003A2992 /* Assets.xcassets */,
 				57A565E125F80DAD003A2992 /* Info.plist */,
+				57E78ACF25F9597D00901E2F /* Sounds */,
 			);
 			path = project14;
+			sourceTree = "<group>";
+		};
+		57E78ACF25F9597D00901E2F /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				57E78AD125F95ACB00901E2F /* gameover.caf */,
+				57E78ACB25F9585100901E2F /* whack.caf */,
+				57E78ACA25F9585100901E2F /* whackBad.caf */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +144,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57E78AD225F95ACB00901E2F /* gameover.caf in Resources */,
 				57A565DE25F80DA7003A2992 /* Main.storyboard in Resources */,
+				57E78ACD25F9585100901E2F /* whack.caf in Resources */,
+				57E78ACC25F9585100901E2F /* whackBad.caf in Resources */,
 				57A565D525F80DA7003A2992 /* GameScene.sks in Resources */,
 				57A565E025F80DAD003A2992 /* Assets.xcassets in Resources */,
 			);
