@@ -48,7 +48,7 @@ class GameScene: SKScene {
     func createEnemy() {
         popupTime *= 0.95
 
-        if numRounds >= 5 {
+        if numRounds >= 30 {
             for slot in slots {
                 slot.hide()
             }
@@ -58,14 +58,15 @@ class GameScene: SKScene {
             gameOver.name = "gameOver"
             
             let gameOverScore = SKLabelNode()
-            gameOverScore.text = "Your score is \(score)"
-            gameOverScore.horizontalAlignmentMode = .center
-            gameOverScore.fontName = "Chalkduster"
-            gameOverScore.fontSize = 80
-            gameOverScore.zPosition = 1
-            let background = SKSpriteNode(color: .black, size: gameOverScore.frame.size)
-            background.position = CGPoint(x: 0, y: 30)
-            gameOverScore.addChild(background)
+            gameOverScore.attributedText = NSAttributedString(
+                string: "Your score is \(score)",
+                attributes: [
+                    NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 80),
+                    NSAttributedString.Key.foregroundColor: UIColor.white,
+                    NSAttributedString.Key.strokeColor: UIColor.black,
+                    NSAttributedString.Key.strokeWidth: -4.0,
+                ]
+            )
             gameOverScore.position = CGPoint(x: 1266, y: 400)
             gameOver.addChild(gameOverScore)
             
@@ -138,6 +139,7 @@ class GameScene: SKScene {
                 self.removeChildren(in: [gameOver])
                 score = 0
                 numRounds = 0
+                popupTime = 0.85
                 createEnemy()
             }
         }
