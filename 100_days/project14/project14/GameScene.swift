@@ -17,6 +17,7 @@ class GameScene: SKScene {
     }
     var slots = [WhackSlot]()
     var popupTime = 0.85
+    var gameOver: SKSpriteNode!
     var numRounds = 0
     
     override func didMove(to view: SKView) {
@@ -47,15 +48,34 @@ class GameScene: SKScene {
     func createEnemy() {
         popupTime *= 0.95
 
-        if numRounds >= 30 {
+        if numRounds >= 5 {
             for slot in slots {
                 slot.hide()
             }
             
-            let gameOver = SKSpriteNode(imageNamed: "GaveOver")
-            gameOver.position = CGPoint(x: 1266, y: 585)
+            gameOver = SKSpriteNode()
             gameOver.zPosition = 1
+            gameOver.name = "gameOver"
+            
+            let gameOverScore = SKLabelNode()
+            gameOverScore.text = "Your score is \(score)"
+            gameOverScore.horizontalAlignmentMode = .center
+            gameOverScore.fontName = "Chalkduster"
+            gameOverScore.fontSize = 80
+            gameOverScore.zPosition = 1
+            let background = SKSpriteNode(color: .black, size: gameOverScore.frame.size)
+            background.position = CGPoint(x: 0, y: 30)
+            gameOverScore.addChild(background)
+            gameOverScore.position = CGPoint(x: 1266, y: 400)
+            gameOver.addChild(gameOverScore)
+            
+            let gameOverImage = SKSpriteNode(imageNamed: "gameOver")
+            gameOverImage.position = CGPoint(x: 1266, y: 585)
+            gameOverImage.zPosition = 1
+            gameOver.addChild(gameOverImage)
+            
             addChild(gameOver)
+            
             gameOver.run(SKAction.playSoundFileNamed("gameover.caf", waitForCompletion: false))
             return
         }
@@ -85,19 +105,40 @@ class GameScene: SKScene {
         let location = touch.location(in: self)
         let tappedNodes = nodes(at: location)
         for node in tappedNodes {
-            guard let whackSlot = node.parent?.parent as? WhackSlot else { return }
-            if !whackSlot.isVisible { return }
-            if whackSlot.isHit { continue }
-            if node.name == "charFriend" {
-                whackSlot.hit()
-                score -= 5
-                
-                run(SKAction.playSoundFileNamed("whackBad.caf", waitForCompletion: false))
-            } else if node.name == "charEnemy" {
-                whackSlot.hit()
-                score += 5
-                
-                run(SKAction.playSoundFileNamed("whack.caf", waitForCompletion: false))
+            if let whackSlot = node.parent?.parent as? WhackSlot {
+                if !whackSlot.isVisible { return }
+                if whackSlot.isHit { continue }
+                if node.name == "charFriend" {
+                    whackSlot.hit()
+                    if let particles = SKEmitterNode(fileNamed: "mud.sks") {
+                        particles.position = whackSlot.position
+                        addChild(particles)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            particles.removeFromParent()
+                        }
+                    }
+                    score -= 5
+                    
+                    run(SKAction.playSoundFileNamed("whackBad.caf", waitForCompletion: false))
+                } else if node.name == "charEnemy" {
+                    whackSlot.hit()
+                    if let particles = SKEmitterNode(fileNamed: "smoke.sks") {
+                        particles.position = whackSlot.position
+                        addChild(particles)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            particles.removeFromParent()
+                        }
+                    }
+                    score += 5
+                    
+                    run(SKAction.playSoundFileNamed("whack.caf", waitForCompletion: false))
+                }
+            }
+            if node.name == "gameOver" {
+                self.removeChildren(in: [gameOver])
+                score = 0
+                numRounds = 0
+                createEnemy()
             }
         }
     }
