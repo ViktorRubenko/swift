@@ -61,6 +61,18 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func pushFlag(_ sender: UIButton) {
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: 10.0,
+            initialSpringVelocity: 1,
+            animations: {
+                sender.alpha = 0
+                },
+            completion: {_ in
+                sender.alpha = 1
+            }
+        )
         let button_index = flagsButtons.firstIndex(of: sender)
         if button_index == correntAnswer {
             score += 1
