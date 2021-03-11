@@ -201,16 +201,15 @@ class ViewController: UIViewController {
     }
     
     func levelUp(action: UIAlertAction) {
-        level += 1
         for button in lettersButtons {
-            button.isHidden = false
+            UIView.animate(withDuration: 1, animations: { button.alpha = 1 })
         }
     }
     
     @objc func clearTapped(_ sender: UIButton) {
         currentAnswer.text = ""
         for button in activatedButtons {
-            button.isHidden = false
+            UIView.animate(withDuration: 1, animations: { button.alpha = 1 })
         }
         activatedButtons.removeAll()
     }
@@ -219,7 +218,13 @@ class ViewController: UIViewController {
         guard let buttonTitle = sender.titleLabel?.text else { return }
         currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
         activatedButtons.append(sender)
-        sender.isHidden = true
+        UIView.animate(
+            withDuration: 1,
+            animations: {
+                sender.alpha = 0.2
+            },
+            completion: nil
+        )
     }
 
 }
