@@ -35,14 +35,14 @@ class DetailCountryViewController: UIViewController {
     
     @objc func share() {
         let factString = """
-        Facts about Belarus:
+        Facts about \(country!.name):
         1. Native name: \(country!.nativeName)
         2. Capital: \(country!.capital)
         3. Population: \(country!.population)
         4. Currencies: \(country!.currencies.map( { $0.name! } ).joined(separator: ", "))
         5. Languages: \(country!.languages.map( { $0.name } ).joined(separator: ", "))
         """
-        let av = UIActivityViewController(activityItems: [factString], applicationActivities: nil)
+        let av = UIActivityViewController(activityItems: [factString, flagImage.image ?? ""], applicationActivities: nil)
         present(av, animated: true, completion: nil)
     }
 
