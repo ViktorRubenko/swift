@@ -15,11 +15,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var filterButton: UIButton!
     
-    var currentImage: UIImage! {
-        didSet {
-            imageView.image = currentImage
-        }
-    }
+    var currentImage: UIImage!
     
     var context: CIContext!
     var currentFilter: CIFilter!
@@ -115,7 +111,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         if let cgimg = context.createCGImage(image, from: image.extent) {
             let processedImage = UIImage(cgImage: cgimg)
-            imageView.image = processedImage
+            UIView.animate(withDuration: 0.5, animations: { self.imageView.alpha = 0 }) { (finished) in
+                UIView.animate(withDuration: 0.5) {
+                    self.imageView.image = processedImage
+                    self.imageView.alpha = 1
+                }
+            }
         }
     }
     
