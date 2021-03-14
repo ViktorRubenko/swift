@@ -41,9 +41,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.cellForItem(at: indexPath)
         if selectedCells.contains(indexPath.row) {
             selectedCells.removeAll(where: { $0 == indexPath.row })
+            cell?.layer.borderWidth = 1
             cell?.layer.borderColor = UIColor(white: 0.5, alpha: 0.2).cgColor
         } else {
             selectedCells.append(indexPath.row)
+            cell?.layer.borderWidth = 3
             cell?.layer.borderColor = UIColor.blue.cgColor
         }
     }
