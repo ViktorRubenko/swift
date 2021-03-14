@@ -53,7 +53,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(importPicture))
-        // Do any additional setup after loading the view.
     }
     
     @objc func importPicture() {
@@ -75,14 +74,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     DispatchQueue.main.async {
                         guard let image = object as? UIImage else { return }
                         self!.images.append(image)
-                        self!.dismiss(animated: true, completion: nil)
                         self!.photoCollectionView.reloadData()
                     }
                 }
             }
         }
+        dismiss(animated: true, completion: nil)
     }
-
-
 }
 
