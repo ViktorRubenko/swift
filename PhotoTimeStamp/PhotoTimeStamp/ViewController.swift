@@ -20,7 +20,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var selectedCells = [Int]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(images.count)
         return images.count
     }
     
@@ -28,7 +27,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell else { fatalError() }
         cell.imageView.image = images[indexPath.row]
         cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor(white: 0, alpha: 0.3).cgColor
+        cell.layer.borderColor = UIColor(white: 0.5, alpha: 0.2).cgColor
         cell.layer.cornerRadius = 2
         return cell
     }
@@ -38,7 +37,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return CGSize(width: width, height: width)
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        if selectedCells.contains(indexPath.row) {
+            selectedCells.removeAll(where: { $0 == indexPath.row })
+            cell?.layer.borderColor = UIColor(white: 0.5, alpha: 0.2).cgColor
+        } else {
+            selectedCells.append(indexPath.row)
+            cell?.layer.borderColor = UIColor.blue.cgColor
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
