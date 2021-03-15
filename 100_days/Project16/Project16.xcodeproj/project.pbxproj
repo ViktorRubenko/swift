@@ -14,6 +14,7 @@
 		5789A5CD25FFFD47001977C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5789A5CC25FFFD47001977C3 /* Assets.xcassets */; };
 		5789A5D025FFFD47001977C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5789A5CE25FFFD47001977C3 /* LaunchScreen.storyboard */; };
 		5789A5D925FFFD7A001977C3 /* Capital.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5789A5D825FFFD79001977C3 /* Capital.swift */; };
+		5789A5DE260004B7001977C3 /* DetailWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5789A5DD260004B7001977C3 /* DetailWebController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		5789A5CF25FFFD47001977C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5789A5D125FFFD47001977C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5789A5D825FFFD79001977C3 /* Capital.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capital.swift; sourceTree = "<group>"; };
+		5789A5DD260004B7001977C3 /* DetailWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWebController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				5789A5DB25FFFE19001977C3 /* SupportingFiles */,
 				5789A5C725FFFD43001977C3 /* ViewController.swift */,
+				5789A5DD260004B7001977C3 /* DetailWebController.swift */,
 				5789A5C925FFFD43001977C3 /* Main.storyboard */,
 				5789A5CC25FFFD47001977C3 /* Assets.xcassets */,
 				5789A5D825FFFD79001977C3 /* Capital.swift */,
@@ -150,6 +153,7 @@
 			files = (
 				5789A5C825FFFD43001977C3 /* ViewController.swift in Sources */,
 				5789A5C425FFFD43001977C3 /* AppDelegate.swift in Sources */,
+				5789A5DE260004B7001977C3 /* DetailWebController.swift in Sources */,
 				5789A5D925FFFD7A001977C3 /* Capital.swift in Sources */,
 				5789A5C625FFFD43001977C3 /* SceneDelegate.swift in Sources */,
 			);
