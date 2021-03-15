@@ -8,6 +8,12 @@
 import UIKit
 import PhotosUI
 
+
+struct TimeStampInfo {
+    let creatinDate: Date?
+    let location: CLLocation?
+}
+
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PHPickerViewControllerDelegate {
     
     @IBOutlet weak var photoCollectionView: UICollectionView! {
@@ -17,6 +23,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     var images = [UIImage]()
+    var imagesInfo = [TimeStampInfo]()
     var selectedCells = [Int]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -50,9 +57,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
+    @objc func addTimeStamp() {
+        for selectedIndex in selectedCells {
+            let image = images[selectedIndex]
+            UIGraphicsBeginImageContext(image.size)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(importPicture))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addTimeStamp))
     }
     
     @objc func importPicture() {
@@ -73,6 +88,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
                     DispatchQueue.main.async {
                         guard let image = object as? UIImage else { return }
+                        
+                        print(results.first?.assetIdentifier)
+//                        if let assetId = result.assetIdentifier,
+//                           let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject {
+//                            print(asset.location)
+//                            print(asset.creationDate)
+//                            self!.imagesInfo.append(
+//                                TimeStampInfo(creatinDate: asset.creationDate, location: asset.location)
+//                            )
+//                        }
+                        
                         self!.images.append(image)
                         self!.photoCollectionView.reloadData()
                     }
