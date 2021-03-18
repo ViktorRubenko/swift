@@ -12,6 +12,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var distanceReading: UILabel!
     
     var locationManager: CLLocationManager?
+    var firstBeaconAlert = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +35,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func startScanning() {
-        let uuid = UUID(uuidString: "5A4BCFCE-174E-4BAC-A814-092E77F6B7E5")!
+        let uuid = UUID(uuidString: "C909CFCB-256A-4165-A2A8-4EC279164DA8")!
+        let bundleID = Bundle.main.bundleIdentifier!
         let beaconIdentity = CLBeaconIdentityConstraint(uuid: uuid, major: 123, minor: 456)
-        let beaconRegion = CLBeaconRegion(uuid: uuid, major: 123, identifier: "456")
+        let beaconRegion = CLBeaconRegion(uuid: uuid, major: 123, identifier: bundleID)
         
         locationManager?.startMonitoring(for: beaconRegion)
         locationManager?.startRangingBeacons(satisfying: beaconIdentity)
@@ -63,6 +65,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didRange beacons: [CLBeacon], satisfying beaconConstraint: CLBeaconIdentityConstraint) {
         if let beacon = beacons.first {
+            if firstBeaconAlert {
+                firstBeaconAlert = false
+                let ac = UIAlertController(title: "First beacon if detected", message: "", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(ac, animated: true, completion: nil)
+            }
             update(distance: beacon.proximity)
         } else {
             update(distance: .unknown)
