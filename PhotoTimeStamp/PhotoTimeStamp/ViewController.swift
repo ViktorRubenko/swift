@@ -71,41 +71,34 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     @objc func importPicture() {
-        var configuration = PHPickerConfiguration()
+        let photoLibrary = PHPhotoLibrary.shared()
+        var configuration = PHPickerConfiguration(photoLibrary: photoLibrary)
         configuration.selectionLimit = 0
         configuration.filter = .images
-        configuration.preferredAssetRepresentationMode = .current
-        
+    
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
         present(picker, animated: true, completion: nil)
     }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        dismiss(animated: true, completion: nil)
+
         for result in results {
             let itemProvider = result.itemProvider
             if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
+                itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                    guard let image = image as? UIImage else { return }
+                    let identifier = result.assetIdentifier
+                    let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [identifier!], options: nil)
+                    
+                    self.images.append(image)
                     DispatchQueue.main.async {
-                        guard let image = object as? UIImage else { return }
-                        
-                        print(results.first?.assetIdentifier)
-//                        if let assetId = result.assetIdentifier,
-//                           let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject {
-//                            print(asset.location)
-//                            print(asset.creationDate)
-//                            self!.imagesInfo.append(
-//                                TimeStampInfo(creatinDate: asset.creationDate, location: asset.location)
-//                            )
-//                        }
-                        
-                        self!.images.append(image)
-                        self!.photoCollectionView.reloadData()
+                        self.photoCollectionView.reloadData()
                     }
                 }
             }
         }
-        dismiss(animated: true, completion: nil)
     }
 }
 
