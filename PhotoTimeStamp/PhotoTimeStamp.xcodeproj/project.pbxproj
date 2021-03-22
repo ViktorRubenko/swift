@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5747ADB72609231C00CC40CC /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5747ADB62609231B00CC40CC /* DetailPhotoView.swift */; };
 		5755553A25F2EC2B001A9F02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5755553925F2EC2B001A9F02 /* AppDelegate.swift */; };
 		5755553C25F2EC2B001A9F02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5755553B25F2EC2B001A9F02 /* SceneDelegate.swift */; };
 		5755553E25F2EC2B001A9F02 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5755553D25F2EC2B001A9F02 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5747ADB62609231B00CC40CC /* DetailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoView.swift; sourceTree = "<group>"; };
 		5755553625F2EC2B001A9F02 /* PhotoTimeStamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTimeStamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5755553925F2EC2B001A9F02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5755553B25F2EC2B001A9F02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				5755553B25F2EC2B001A9F02 /* SceneDelegate.swift */,
 				5755553D25F2EC2B001A9F02 /* ViewController.swift */,
 				5755553F25F2EC2B001A9F02 /* Main.storyboard */,
+				5747ADB62609231B00CC40CC /* DetailPhotoView.swift */,
 				5766299025F2F115002446AF /* PhotoCell.swift */,
 				5755554225F2EC30001A9F02 /* Assets.xcassets */,
 				5755554425F2EC30001A9F02 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5747ADB72609231C00CC40CC /* DetailPhotoView.swift in Sources */,
 				5766299125F2F115002446AF /* PhotoCell.swift in Sources */,
 				5755553E25F2EC2B001A9F02 /* ViewController.swift in Sources */,
 				5755553A25F2EC2B001A9F02 /* AppDelegate.swift in Sources */,
