@@ -129,7 +129,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true, completion: nil)
 
+        let myGroup = DispatchGroup()
+        
         for result in results {
+            myGroup.enter()
             let itemProvider = result.itemProvider
             if itemProvider.canLoadObject(ofClass: UIImage.self) {
                 itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
@@ -140,10 +143,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     print(creationDate)
                     let location = fetchResult[0].location
                     self.data.append((image, TimeStampInfo(creationDate: creationDate, location: location)))
-                    DispatchQueue.main.async {
-                        self.photoCollectionView.reloadData()
-                    }
+                    myGroup.leave()
                 }
+            }
+        }
+        
+        myGroup.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
+            DispatchQueue.main.async {
+                [weak self] in
+                self!.photoCollectionView.reloadData()
             }
         }
     }
