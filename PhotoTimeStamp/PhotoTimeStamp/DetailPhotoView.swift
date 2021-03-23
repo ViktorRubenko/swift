@@ -7,16 +7,31 @@
 
 import UIKit
 
-class DetailPhotoView: UIViewController {
+class DetailPhotoView: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet weak var scrollView: UIScrollView! {
+        didSet {
+            scrollView.delegate = self
+            scrollView.maximumZoomScale = 3
+            scrollView.minimumZoomScale = 0.2
+            scrollView.bouncesZoom = true
+            scrollView.contentMode = .scaleAspectFit
+        }
+    }
     var image: UIImage?
-    @IBOutlet weak var imageView: UIImageView!
+    var imageView: UIImageView?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let img = image {
-            imageView.image = img
+            imageView = UIImageView(image: img)
+            scrollView.addSubview(imageView!)
         }
     }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView!
+    }
+    
 
 }
