@@ -66,7 +66,7 @@ class Model {
             NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.strokeWidth: -1,
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 150)
+            NSAttributedString.Key.font: UIFont(name: "Futura", size: info.originImage.size.width * 0.075)!
         ])
         
         let image = info.originImage
