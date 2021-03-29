@@ -54,7 +54,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let vc = storyboard?.instantiateViewController(identifier: "DetailPhotoView") as? DetailPhotoView else { return }
+        guard let vc = storyboard?.instantiateViewController(identifier: "DetailPhotoView") as? DetailViewController else { return }
         vc.image = model.infos[indexPath.row].image
         navigationController?.pushViewController(vc, animated: true)    }
     
