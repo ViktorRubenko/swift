@@ -11,6 +11,7 @@ import PhotosUI
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PHPickerViewControllerDelegate {
     
+    @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var photoCollectionView: UICollectionView! {
         didSet {
@@ -23,19 +24,36 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(importPicture))
         //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeSelected))
         
         navigationController?.isToolbarHidden = false
         toolbarItems = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-            //            UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(addTimeStamp)),
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(savePhotos)),
+            UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
         ]
     }
     
+    @objc func savePhotos() {
+        if selectedCells.isEmpty {
+            let ac = UIAlertController(title: "Save Photos", message: "No photos selected, save all?", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "YES", style: .default, handler: {
+                [weak self] (_) in
+                for info in self!.model.infos {
+                    UIImageWriteToSavedPhotosAlbum(info.image, self, nil, nil)
+                }
+                let ac = UIAlertController(title: "All photos saved to the Gallery", message: "", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self!.present(ac, animated: true, completion: nil)
+            }))
+            ac.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
+            present(ac, animated: true, completion: nil)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(model.infos.count)
         return model.infos.count
     }
     

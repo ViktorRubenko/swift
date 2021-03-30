@@ -78,6 +78,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="XIA-K6-nzv" id="GMR-BA-oFL"/>
                         <outlet property="photoCollectionView" destination="V1s-Bo-tgZ" id="yiC-dp-S59"/>
+                        <outlet property="toolBar" destination="dLh-oq-UMr" id="orj-fs-cIw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0wc-fo-6e3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
