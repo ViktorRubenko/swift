@@ -58,7 +58,7 @@ class Model {
     func addTimeStamp(info: TimeStampInfo) -> UIImage {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy\nHH:mm"
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
         dateFormatter.locale = .current
         
         let creationDate = info.creationDate
@@ -66,7 +66,7 @@ class Model {
             NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.strokeWidth: -1,
-            NSAttributedString.Key.font: UIFont(name: "Futura", size: info.originImage.size.width * 0.075)!
+            NSAttributedString.Key.font: UIFont(name: "Futura", size: info.originImage.size.width * 0.045)!
         ])
         
         let image = info.originImage
