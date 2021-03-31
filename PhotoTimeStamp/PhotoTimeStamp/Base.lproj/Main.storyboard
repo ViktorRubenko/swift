@@ -60,18 +60,18 @@
                                 <items/>
                             </toolbar>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="BKY-99-fic"/>
+                        <viewLayoutGuide key="safeArea" id="5aM-Am-ocS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="BKY-99-fic" firstAttribute="trailing" secondItem="V1s-Bo-tgZ" secondAttribute="trailing" id="E3A-J5-CVa"/>
-                            <constraint firstItem="dLh-oq-UMr" firstAttribute="trailing" secondItem="BKY-99-fic" secondAttribute="trailing" id="IM1-2d-4FJ"/>
+                            <constraint firstItem="5aM-Am-ocS" firstAttribute="trailing" secondItem="V1s-Bo-tgZ" secondAttribute="trailing" id="E3A-J5-CVa"/>
+                            <constraint firstItem="dLh-oq-UMr" firstAttribute="trailing" secondItem="5aM-Am-ocS" secondAttribute="trailing" id="IM1-2d-4FJ"/>
                             <constraint firstAttribute="bottom" secondItem="dLh-oq-UMr" secondAttribute="bottom" id="Mmt-2K-IfX"/>
-                            <constraint firstItem="dLh-oq-UMr" firstAttribute="leading" secondItem="BKY-99-fic" secondAttribute="leading" id="aIh-tX-6fs"/>
-                            <constraint firstItem="dLh-oq-UMr" firstAttribute="trailing" secondItem="BKY-99-fic" secondAttribute="trailing" id="gNb-pa-OXe"/>
+                            <constraint firstItem="dLh-oq-UMr" firstAttribute="leading" secondItem="5aM-Am-ocS" secondAttribute="leading" id="aIh-tX-6fs"/>
+                            <constraint firstItem="dLh-oq-UMr" firstAttribute="trailing" secondItem="5aM-Am-ocS" secondAttribute="trailing" id="gNb-pa-OXe"/>
                             <constraint firstItem="dLh-oq-UMr" firstAttribute="top" secondItem="V1s-Bo-tgZ" secondAttribute="bottom" id="nGA-6L-b68"/>
-                            <constraint firstItem="V1s-Bo-tgZ" firstAttribute="top" secondItem="BKY-99-fic" secondAttribute="top" id="p5U-Sl-Cik"/>
-                            <constraint firstItem="V1s-Bo-tgZ" firstAttribute="leading" secondItem="BKY-99-fic" secondAttribute="leading" id="wCs-YZ-kUC"/>
-                            <constraint firstItem="dLh-oq-UMr" firstAttribute="leading" secondItem="BKY-99-fic" secondAttribute="leading" id="xZU-OJ-oln"/>
+                            <constraint firstItem="V1s-Bo-tgZ" firstAttribute="top" secondItem="5aM-Am-ocS" secondAttribute="top" id="p5U-Sl-Cik"/>
+                            <constraint firstItem="V1s-Bo-tgZ" firstAttribute="leading" secondItem="5aM-Am-ocS" secondAttribute="leading" id="wCs-YZ-kUC"/>
+                            <constraint firstItem="dLh-oq-UMr" firstAttribute="leading" secondItem="5aM-Am-ocS" secondAttribute="leading" id="xZU-OJ-oln"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wD7-Og-gqL"/>
@@ -108,10 +108,6 @@
         <scene sceneID="fM8-km-3Tt">
             <objects>
                 <viewController storyboardIdentifier="DetailPhotoView" id="6Je-3h-eiR" customClass="DetailViewController" customModule="PhotoTimeStamp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0BG-Et-nXH"/>
-                        <viewControllerLayoutGuide type="bottom" id="wjS-rJ-NUv"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="izq-x3-kLz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -131,13 +127,13 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="VoI-aI-3iD"/>
+                        <viewLayoutGuide key="safeArea" id="27R-fO-F0t"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wjS-rJ-NUv" firstAttribute="top" secondItem="FZh-0x-9Eo" secondAttribute="bottom" id="5Jz-zm-rCF"/>
-                            <constraint firstAttribute="trailing" secondItem="FZh-0x-9Eo" secondAttribute="trailing" id="Xsg-PX-OrQ"/>
-                            <constraint firstItem="FZh-0x-9Eo" firstAttribute="top" secondItem="0BG-Et-nXH" secondAttribute="bottom" id="kzf-KT-0FU"/>
-                            <constraint firstItem="FZh-0x-9Eo" firstAttribute="leading" secondItem="izq-x3-kLz" secondAttribute="leading" id="nN0-yM-tjk"/>
+                            <constraint firstItem="27R-fO-F0t" firstAttribute="bottom" secondItem="FZh-0x-9Eo" secondAttribute="bottom" id="5Jz-zm-rCF"/>
+                            <constraint firstItem="27R-fO-F0t" firstAttribute="trailing" secondItem="FZh-0x-9Eo" secondAttribute="trailing" id="Xsg-PX-OrQ"/>
+                            <constraint firstItem="FZh-0x-9Eo" firstAttribute="top" secondItem="27R-fO-F0t" secondAttribute="top" id="kzf-KT-0FU"/>
+                            <constraint firstItem="FZh-0x-9Eo" firstAttribute="leading" secondItem="27R-fO-F0t" secondAttribute="leading" id="nN0-yM-tjk"/>
                         </constraints>
                     </view>
                     <connections>
