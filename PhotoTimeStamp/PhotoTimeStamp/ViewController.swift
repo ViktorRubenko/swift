@@ -29,11 +29,85 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeSelected))
         
         navigationController?.isToolbarHidden = false
-        toolbarItems = [
-            UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-            UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(savePhotos)),
-            UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-        ]
+        updateToolbar()
+    }
+    
+    func updateToolbar() {
+        if model.infos.isEmpty {
+            toolbarItems = []
+        } else {
+            toolbarItems = [
+                UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+                UIBarButtonItem.init(title: "Share", style: .plain, target: self, action: #selector(sharePhotos)),
+                UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+                UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(savePhotos)),
+                UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+                UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(removePhotos)),
+                UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            ]
+        }
+    }
+    
+    func resizeImage(_ image: UIImage) -> UIImage {
+        var prefSize = (height: CGFloat(0), width: CGFloat(0))
+        if image.size.height >= image.size.width {
+            let coef = image.size.width / image.size.height
+            prefSize = (height: 1000, width: image.size.width * coef)
+        } else {
+            let coef = image.size.height / image.size.width
+            prefSize = (height: image.size.height * coef, width: 1000)
+        }
+        let widthScaleRatio = prefSize.width / image.size.width
+        let heightScaleRatio = prefSize.height / image.size.height
+        let scaleFactor = min(widthScaleRatio, heightScaleRatio)
+        
+        let scaledImageSize = CGSize(
+            width: image.size.width * scaleFactor,
+            height: image.size.height * scaleFactor
+        )
+        
+        let renderer = UIGraphicsImageRenderer(size: scaledImageSize)
+        let scaledImage = renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: scaledImageSize))
+        }
+            
+        return scaledImage
+    }
+    
+    @objc func sharePhotos() {
+        if selectedCells.isEmpty {
+            let ac = UIAlertController(title: "Share Photos", message: "No photos selected, share all?", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "YES", style: .default, handler: {
+                [weak self] (_) in
+                var images = [UIImage]()
+                for info in self!.model.infos {
+                    images.append(info.image.resize())
+                }
+                let activityController = UIActivityViewController(activityItems: images, applicationActivities: nil)
+                self!.present(activityController, animated: true)
+            }))
+            ac.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
+            present(ac, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func removePhotos() {
+        if selectedCells.isEmpty {
+            let ac = UIAlertController(title: "Remove Photos", message: "No photos selected, remove all?", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "YES", style: .default, handler: {
+                [weak self] (_) in
+                self!.model.infos.removeAll()
+                DispatchQueue.main.async {
+                    self?.photoCollectionView.reloadData()
+                    self?.updateToolbar()
+                }
+                let ac = UIAlertController(title: "All photos were removed", message: "", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self!.present(ac, animated: true, completion: nil)
+            }))
+            ac.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
+            present(ac, animated: true, completion: nil)
+        }
     }
     
     @objc func savePhotos() {
@@ -44,7 +118,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 for info in self!.model.infos {
                     UIImageWriteToSavedPhotosAlbum(info.image, self, nil, nil)
                 }
-                let ac = UIAlertController(title: "All photos saved to the Gallery", message: "", preferredStyle: .alert)
+                let ac = UIAlertController(title: "All photos were saved to the Gallery", message: "", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self!.present(ac, animated: true, completion: nil)
             }))
@@ -94,6 +168,35 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.model.addResults(results: results, complition: {
             self.photoCollectionView.reloadData()
             self.activityIndicator.stopAnimating()
+            self.updateToolbar()
         })
+    }
+}
+
+extension UIImage {
+    func resize() -> UIImage {
+        var prefSize = (height: CGFloat(0), width: CGFloat(0))
+        if self.size.height >= self.size.width {
+            let coef = self.size.width / self.size.height
+            prefSize = (height: 1000, width: self.size.width * coef)
+        } else {
+            let coef = self.size.height / self.size.width
+            prefSize = (height: self.size.height * coef, width: 1000)
+        }
+        let widthScaleRatio = prefSize.width / self.size.width
+        let heightScaleRatio = prefSize.height / self.size.height
+        let scaleFactor = min(widthScaleRatio, heightScaleRatio)
+        
+        let scaledImageSize = CGSize(
+            width: self.size.width * scaleFactor,
+            height: self.size.height * scaleFactor
+        )
+        
+        let renderer = UIGraphicsImageRenderer(size: scaledImageSize)
+        let scaledImage = renderer.image { _ in
+            self.draw(in: CGRect(origin: .zero, size: scaledImageSize))
+        }
+            
+        return scaledImage
     }
 }
