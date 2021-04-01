@@ -19,6 +19,8 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, UIGestureRec
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.isToolbarHidden = true
+        
         let item = UIBarButtonItem.init()
         item.title = "..."
         item.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)], for: .normal)
