@@ -171,7 +171,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true, completion: nil)
         activityIndicator.startAnimating()
-        
+        if results.isEmpty {
+            self.activityIndicator.stopAnimating()
+        }
         self.model.addResults(results: results, complition: {
             self.photoCollectionView.reloadData()
             self.activityIndicator.stopAnimating()

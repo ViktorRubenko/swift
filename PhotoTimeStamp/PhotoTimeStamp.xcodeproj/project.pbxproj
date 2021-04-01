@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		573AC5C5261625C6002E2698 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573AC5C4261625C6002E2698 /* UIImageExtension.swift */; };
+		573AC5CA26162840002E2698 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573AC5C4261625C6002E2698 /* UIImageExtension.swift */; };
 		5747ADB72609231C00CC40CC /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5747ADB62609231B00CC40CC /* DetailPhotoView.swift */; };
 		5755553A25F2EC2B001A9F02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5755553925F2EC2B001A9F02 /* AppDelegate.swift */; };
 		5755553C25F2EC2B001A9F02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5755553B25F2EC2B001A9F02 /* SceneDelegate.swift */; };
@@ -167,7 +167,7 @@
 			files = (
 				5747ADB72609231C00CC40CC /* DetailPhotoView.swift in Sources */,
 				5766299125F2F115002446AF /* PhotoCell.swift in Sources */,
-				573AC5C5261625C6002E2698 /* UIImageExtension.swift in Sources */,
+				573AC5CA26162840002E2698 /* UIImageExtension.swift in Sources */,
 				57A9D0DB260A93AA00A40148 /* TimeStampModel.swift in Sources */,
 				5755553E25F2EC2B001A9F02 /* ViewController.swift in Sources */,
 				5755553A25F2EC2B001A9F02 /* AppDelegate.swift in Sources */,
