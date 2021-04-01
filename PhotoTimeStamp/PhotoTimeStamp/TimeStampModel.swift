@@ -36,9 +36,11 @@ struct TimeStampData {
 class Model {
     var infos = [TimeStampData]()
     
-    func addResults(results: [PHPickerResult], complition: @escaping () -> Void = { return }) {
+    func addResults(results: [PHPickerResult], action: @escaping () -> Void = { return }, complition: @escaping () -> Void = { return }) {
+        let group = DispatchGroup()
         DispatchQueue.global(qos: .userInitiated).async {
             for result in results {
+                group.enter()
                 let itemProvider = result.itemProvider
                 if itemProvider.canLoadObject(ofClass: UIImage.self) {
                     itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
@@ -46,10 +48,16 @@ class Model {
                         let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [result.assetIdentifier!], options: nil)
                         let info = TimeStampInfo(originImage: originImage, location: fetchResult[0].location, creationDate: fetchResult[0].creationDate!)
                         self.infos.append(TimeStampData(image: self.addTimeStamp(info: info), info: info))
+                        group.leave()
                         DispatchQueue.main.async {
-                            complition()
+                            action()
                         }
                     }
+                }
+            }
+            group.notify(queue: DispatchQueue.main) {
+                DispatchQueue.main.async {
+                    complition()
                 }
             }
         }

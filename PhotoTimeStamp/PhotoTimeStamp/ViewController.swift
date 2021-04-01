@@ -76,7 +76,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let scaledImage = renderer.image { _ in
             image.draw(in: CGRect(origin: .zero, size: scaledImageSize))
         }
-            
+        
         return scaledImage
     }
     
@@ -174,10 +174,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if results.isEmpty {
             self.activityIndicator.stopAnimating()
         }
-        self.model.addResults(results: results, complition: {
-            self.photoCollectionView.reloadData()
-            self.activityIndicator.stopAnimating()
-            self.updateToolbar()
-        })
+        self.model.addResults(
+            results: results,
+            action: {
+                self.photoCollectionView.reloadData()
+                self.updateToolbar()
+            },
+            complition: {
+                print("end")
+                self.activityIndicator.stopAnimating()
+            }
+        )
     }
 }
