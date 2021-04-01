@@ -32,6 +32,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         updateToolbar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        photoCollectionView.reloadData()
+        updateToolbar()
+    }
+    
     func updateToolbar() {
         if model.infos.isEmpty {
             toolbarItems = []
@@ -148,7 +154,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let vc = storyboard?.instantiateViewController(identifier: "DetailPhotoView") as? DetailViewController else { return }
         vc.imageIndex = indexPath.row
-        vc.images = model.infos.map( { $0.image })
+        vc.model = model
         navigationController?.pushViewController(vc, animated: true)    }
     
     @objc func importPicture() {

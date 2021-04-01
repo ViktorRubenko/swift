@@ -4,7 +4,7 @@ import UIKit
 class DetailViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     var imageIndex = 0
-    var images = [UIImage]()
+    weak var model: Model!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
@@ -19,6 +19,14 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, UIGestureRec
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let item = UIBarButtonItem.init()
+        item.title = "..."
+        item.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)], for: .normal)
+        item.style = .plain
+        item.target = self
+        item.action = #selector(showActions)
+        navigationItem.rightBarButtonItem = item
+        
         let swipeLeftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeHandler))
         swipeLeftRecognizer.direction = .left
         let swipeRightRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeHandler))
@@ -27,6 +35,23 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, UIGestureRec
         view.addGestureRecognizer(swipeRightRecognizer)
     }
     
+    @objc func showActions() {
+        let ac = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Remove", style: .default, handler: { (_) in
+            self.model.infos.remove(at: self.imageIndex)
+            self.imageIndex -= 1
+            if self.imageIndex >= 0 {
+                self.imageView.image = self.model.infos[self.imageIndex].image
+                self.updateZoom()
+            } else {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }))
+        present(ac, animated: true, completion: nil)
+    }
+    
+    
+    
     @objc func swipeHandler(_ gestureRecignizer: UISwipeGestureRecognizer) {
         let location = gestureRecignizer.location(in: imageView)
         print(location)
@@ -34,15 +59,15 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, UIGestureRec
         if gestureRecignizer.state == .ended {
             switch gestureRecignizer.direction {
             case .left:
-                if imageIndex < images.count - 1 {
+                if imageIndex < model.infos.count - 1 {
                     imageIndex += 1
-                    imageView.image = images[imageIndex]
+                    imageView.image = model.infos[imageIndex].image
                     updateZoom()
                 }
             case .right:
                 if imageIndex > 0 {
                     imageIndex -= 1
-                    imageView.image = images[imageIndex]
+                    imageView.image = model.infos[imageIndex].image
                     updateZoom()
                 }
             default:
@@ -54,7 +79,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, UIGestureRec
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        imageView.image = images[imageIndex]
+        imageView.image = model.infos[imageIndex].image
         scrollView.delegate = self
         updateZoom()
     }
