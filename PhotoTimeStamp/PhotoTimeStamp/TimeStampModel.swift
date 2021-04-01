@@ -75,7 +75,7 @@ class Model {
         let renderer = UIGraphicsImageRenderer(size: image.size, format: format)
         let img = renderer.image(actions: { (_) in
             image.draw(at: .zero)
-            text.draw(at: CGPoint(x: image.size.width * 0.05, y: image.size.height - image.size.width * 0.05))
+            text.draw(at: CGPoint(x: image.size.width * 0.05, y: image.size.height - image.size.width * 0.08))
         })
         return img
     }
