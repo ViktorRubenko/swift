@@ -81,7 +81,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 [weak self] (_) in
                 var images = [UIImage]()
                 for info in self!.model.infos {
-                    images.append(info.image.resize())
+                    images.append(info.image.compress())
                 }
                 let activityController = UIActivityViewController(activityItems: images, applicationActivities: nil)
                 self!.present(activityController, animated: true)
@@ -147,7 +147,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let vc = storyboard?.instantiateViewController(identifier: "DetailPhotoView") as? DetailViewController else { return }
-        vc.image = model.infos[indexPath.row].image
+        vc.imageIndex = indexPath.row
+        vc.images = model.infos.map( { $0.image })
         navigationController?.pushViewController(vc, animated: true)    }
     
     @objc func importPicture() {
@@ -174,7 +175,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 }
 
 extension UIImage {
-    func resize() -> UIImage {
+    func compress() -> UIImage {
         var prefSize = (height: CGFloat(0), width: CGFloat(0))
         if self.size.height >= self.size.width {
             let coef = self.size.width / self.size.height
@@ -197,6 +198,8 @@ extension UIImage {
             self.draw(in: CGRect(origin: .zero, size: scaledImageSize))
         }
             
-        return scaledImage
+        let imageData = scaledImage.jpegData(compressionQuality: 0.1)!
+            
+        return UIImage(data: imageData)!
     }
 }
