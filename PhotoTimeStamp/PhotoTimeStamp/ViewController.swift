@@ -38,7 +38,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         } else {
             toolbarItems = [
                 UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-                UIBarButtonItem.init(title: "Share", style: .plain, target: self, action: #selector(sharePhotos)),
+                UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(sharePhotos)),
                 UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
                 UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(savePhotos)),
                 UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
