@@ -1,9 +1,10 @@
 import UIKit
 
 
-class DetailViewController: UIViewController, UIScrollViewDelegate {
+class DetailViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
-    weak var image: UIImage!
+    var imageIndex = 0
+    var images = [UIImage]()
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
@@ -15,10 +16,45 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     
     var lastZoomScale: CGFloat = -1
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let swipeLeftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeHandler))
+        swipeLeftRecognizer.direction = .left
+        let swipeRightRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeHandler))
+        swipeLeftRecognizer.direction = .right
+        view.addGestureRecognizer(swipeLeftRecognizer)
+        view.addGestureRecognizer(swipeRightRecognizer)
+    }
+    
+    @objc func swipeHandler(_ gestureRecignizer: UISwipeGestureRecognizer) {
+        let location = gestureRecignizer.location(in: imageView)
+        print(location)
+        print(imageIndex)
+        if gestureRecignizer.state == .ended {
+            switch gestureRecignizer.direction {
+            case .left:
+                if imageIndex < images.count - 1 {
+                    imageIndex += 1
+                    imageView.image = images[imageIndex]
+                    updateZoom()
+                }
+            case .right:
+                if imageIndex > 0 {
+                    imageIndex -= 1
+                    imageView.image = images[imageIndex]
+                    updateZoom()
+                }
+            default:
+                return
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        imageView.image = image
+        imageView.image = images[imageIndex]
         scrollView.delegate = self
         updateZoom()
     }
@@ -77,7 +113,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-
+    
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         updateConstraints()
     }
