@@ -38,7 +38,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, UIGestureRec
     }
     
     @objc func showActions() {
-        let ac = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        let ac = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Remove", style: .default, handler: { (_) in
             self.model.infos.remove(at: self.imageIndex)
             self.imageIndex -= 1
@@ -49,6 +49,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate, UIGestureRec
                 self.navigationController?.popToRootViewController(animated: true)
             }
         }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(ac, animated: true, completion: nil)
     }
     
